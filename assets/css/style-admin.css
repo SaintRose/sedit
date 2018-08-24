@@ -1,4 +1,13 @@
 .hide-img{
   cursor: pointer;
   max-width: 100%;
+  width:auto;
+  display: block;
+  position: relative;
+}
+.img_slider{
+  width: 100%;
+}
+.form-table{
+  width: 100%;
 }

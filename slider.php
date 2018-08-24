@@ -151,13 +151,13 @@ function display_slider_gallery_meta_box( $review ) {
     <table class="form-table">
   		<tbody>
         <tr>
-    			<td class="term-group-58796">
+    			<td>
   					<input type="hidden" name="txt_upload_image" id="txt_upload_image" value="<?php echo get_multi_info($review->ID, 'slider_image', 'value', 'full', 58796); ?>">
   					<button type="button" data-id="58796" class="button addSingleMedia" data-media-uploader-target="#txt_upload_image">Wybierz zdjęcie</button>
     			</td>
     		</tr>
         <tr>
-          <td>
+          <td class="term-group-58796">
             <?php echo get_multi_info($review->ID, 'slider_image', 'image', 'full', 58796); ?>
           </td>
         </tr>

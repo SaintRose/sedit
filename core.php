@@ -1,5 +1,46 @@
 <?php
-//edytuje opcjefbvgdfgdfg
+add_action( 'admin_enqueue_scripts', 'load_custom_wp_admin_style' );
+// dodatki dla admina
+function load_custom_wp_admin_style() {
+	wp_enqueue_media();
+	wp_enqueue_style( 'font-awesome', 'https://use.fontawesome.com/releases/v5.1.0/css/all.css', false, '' );
+ 	wp_enqueue_script( 'custom_wp_admin_script', get_template_directory_uri() . '/sedit/assets/js/wp-media.js', false, '1.0.0' );
+ 	wp_enqueue_script( 'custom_wp_admin_script', get_template_directory_uri() . '/sedit/assets/js/code.js', false, '1.0.0' );
+	wp_enqueue_style( 'style-admin', get_template_directory_uri() . '/sedit/assets/css/style-admin.css', false, '' );
+}
+
+
+add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
+// dodatki dla stylu
+function theme_enqueue_styles() {
+		wp_enqueue_style( 'style-slider', get_template_directory_uri() . '/sedit/assets/css/slider.css', false, '' );
+    wp_enqueue_style( 'style', get_template_directory_uri() . '/style.css', false, '' );
+		wp_enqueue_script( 'jquery.min', get_template_directory_uri() . '/sedit/assets/js/jquery.min.js', false, '3.3.1' );
+		wp_enqueue_script( 'responsiveslides.min', get_template_directory_uri() . '/sedit/assets/js/responsiveslides.min.js', false, '1.0.0' );
+		wp_enqueue_script( 'googlemap', get_template_directory_uri() . '/sedit/assets/js/googlemap.js', false, '1.0.0' );
+		wp_enqueue_script( 'slick', get_template_directory_uri() . '/sedit/assets/js/slick.js', false, '1.0.0' );
+		wp_enqueue_script( 'rodo', get_template_directory_uri() . '/sedit/assets/js/rodo.js', false, '1.0.0' );
+		wp_enqueue_script( 'code', get_template_directory_uri() . '/sedit/assets/js/code-style.js', false, '1.0.0' );
+		echo '
+		<script type="text/javascript">
+			var map;
+			function initMap() {
+				map = new google.maps.Map(document.getElementById("map"), {
+					center: {lat: -34.397, lng: 150.644},
+					zoom: 8
+				});
+			}
+		</script>
+		';
+}
+
+add_image_size( 'thumb100', 100, 100, true );
+add_image_size( 'thumb300', 300, 300, true );
+add_image_size( 'thumb350', 350, false );
+add_image_size( 'thumb500', 500, 500, true );
+add_image_size( 'thumb200x80', 200, 80, true );
+add_theme_support( 'post-thumbnails' );
+
 //////////////Zapisanie ustawień///////////////
 function save_multi_option($name, $type){
 	if ( isset( $_POST['submit'] ) && $_POST['submit'] != '' ) {
