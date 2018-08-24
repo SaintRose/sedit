@@ -2,9 +2,9 @@
 function load_custom_wp_admin_style() {
 	wp_enqueue_media();
 	wp_enqueue_style( 'font-awesome', 'https://use.fontawesome.com/releases/v5.1.0/css/all.css', false, '' );
- 	wp_enqueue_script( 'custom_wp_admin_script', get_template_directory_uri() . '/assets/js/wp-media.js', false, '1.0.0' );
- 	wp_enqueue_script( 'custom_wp_admin_script', get_template_directory_uri() . '/assets/js/code.js', false, '1.0.0' );
-	wp_enqueue_style( 'style-admin', get_template_directory_uri() . '/assets/css/style-admin.css', false, '' );
+ 	wp_enqueue_script( 'custom_wp_admin_script', get_template_directory_uri() . '/sedit/assets/js/wp-media.js', false, '1.0.0' );
+ 	wp_enqueue_script( 'custom_wp_admin_script', get_template_directory_uri() . '/sedit/assets/js/code.js', false, '1.0.0' );
+	wp_enqueue_style( 'style-admin', get_template_directory_uri() . '/sedit/assets/css/style-admin.css', false, '' );
 }
 add_action( 'admin_enqueue_scripts', 'load_custom_wp_admin_style' );
 
@@ -25,7 +25,5 @@ $sedit = new seditSlider();
 $sedit->addSlider();
 
 register_nav_menus( array(
-	'top'    => 'Menu główne',
-	'footer1'    => 'Nasza oferta',
-	'footer2'    => 'Informacje'
+	'top'    => 'Menu główne'
 ) );
