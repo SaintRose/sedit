@@ -1,5 +1,5 @@
 <?php
-//edytuje opcje
+//edytuje opcjefbvgdfgdfg
 //////////////Zapisanie ustawień///////////////
 function save_multi_option($name, $type){
 	if ( isset( $_POST['submit'] ) && $_POST['submit'] != '' ) {
