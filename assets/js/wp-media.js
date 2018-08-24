@@ -17,7 +17,7 @@ jQuery(document).ready(function($) {
      var url = media_attachment.url;
 
      $('.hide-img-' + dataID).hide();
-     $(".term-group-" + dataID).append('<img class="hide-img-'  + dataID + '" src="' + url + '">');
+     $(".term-group-" + dataID).append('<img class="hide-img hide-img-'  + dataID + '" src="' + url + '">');
    });
    metaImageFrame.open();
 

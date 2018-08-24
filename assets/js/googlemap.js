@@ -13,7 +13,7 @@ function initMap() {
 	scrollwheel: false,
 	disableDoubleClickZoom: true
   });
-  var image = 'http://localhost/wp-content/themes/arhen/assets/images/marker.png';
+  var image = 'http://respan.big07.pl/images/marker.png';
   var marker = new google.maps.Marker({
     position: myLatLng,
     map: map,
