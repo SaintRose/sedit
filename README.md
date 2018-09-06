@@ -1,10 +1,13 @@
-## Pre
+<?php
 
 <h2>Instalacja</h2>
-<p>Pierwsza wersja 1.0, stabilna sposób użycia</p>
-```php
-git clone git@github.com:piotrseed/sedit.git
 
+<pre>
+  git clone git@github.com:piotrseed/sedit.git
+</pre>
+<p>Pierwsza wersja 1.0, stabilna sposób użycia</p>
+<pre>
+```php
 include 'sedit/core.php';
 $tabs = [
 
@@ -38,3 +41,4 @@ $tabs = [
 $sedit = new seditTabs();
 $sedit->pageTabsData($tabs);
 ```
+</pre>
