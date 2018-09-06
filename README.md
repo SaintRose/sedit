@@ -2,7 +2,7 @@
 
 <pre>
   git clone git@github.com:piotrseed/sedit.git
-<pre>
+</pre>
 <p>Pierwsza wersja 1.0, stabilna sposób użycia</p>
 <pra>
 include 'sedit/core.php';
