@@ -11,3 +11,18 @@
 .form-table{
   width: 100%;
 }
+.fa-copy{
+  cursor: pointer;
+  color: #ccc;
+  padding: 5px;
+  top: 0;
+  display: none;
+}
+.fa-copy:hover{
+  color: #aaa;
+}
+.front-code-php label{
+  font-family: 'Courier New';
+  cursor: default;
+  font-size: 0;
+}
