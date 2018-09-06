@@ -1,8 +1,5 @@
 <?php
 include 'sedit/core.php';
-include 'sedit/hooks.php';
-include 'sedit/slider.php';
-include 'sedit/settings.php';
 
 $sedit = new seditSlider();
 $sedit->addSlider();
