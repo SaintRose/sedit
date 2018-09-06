@@ -1,4 +1,4 @@
-<?php
+## Pre
 
 <h2>Instalacja</h2>
 
