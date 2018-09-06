@@ -1,12 +1,21 @@
-<?php
+# Wtyczka BigCom
 
-<h2>Instalacja</h2>
+_Prosta instrukcja obsługi_
 
-<pre>
-  git clone git@github.com:piotrseed/sedit.git
-</pre>
-<p>Pierwsza wersja 1.0, stabilna sposób użycia</p>
-<pre>
+
+## Instalacja
+
+Szubkie pobranie z github:
+
+```bash
+$ git clone git@github.com:piotrseed/sedit.git
+```
+
+
+## Przykład użycia
+
+1.  Ponyższy kod należy użyć w `functions.php`
+
 ```php
 include 'sedit/core.php';
 $tabs = [
@@ -40,5 +49,5 @@ $tabs = [
 
 $sedit = new seditTabs();
 $sedit->pageTabsData($tabs);
+
 ```
-</pre>
