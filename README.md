@@ -1,12 +1,10 @@
 ## Pre
 
 <h2>Instalacja</h2>
-
-```php
-  git clone git@github.com:piotrseed/sedit.git
-```
 <p>Pierwsza wersja 1.0, stabilna sposób użycia</p>
 ```php
+git clone git@github.com:piotrseed/sedit.git
+
 include 'sedit/core.php';
 $tabs = [
 
