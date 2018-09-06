@@ -4,7 +4,7 @@
   git clone git@github.com:piotrseed/sedit.git
 </pre>
 <p>Pierwsza wersja 1.0, stabilna sposób użycia</p>
-<pra>
+<pre>
 include 'sedit/core.php';
 $tabs = [
 
