@@ -1,3 +1,5 @@
+<?php
+
 <h2>Instalacja</h2>
 
 <pre>
