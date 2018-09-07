@@ -57,11 +57,6 @@ class seditSlider
 function display_slider_meta_box( $review ) {
     $option1 = get_post_meta( $review->ID, 'option1', true );
     $option2 = get_post_meta( $review->ID, 'option2', true );
-    $option3 = get_post_meta( $review->ID, 'option3', true );
-    $option4 = get_post_meta( $review->ID, 'option4', true );
-    $option5 = get_post_meta( $review->ID, 'option5', true );
-    $option6 = get_post_meta( $review->ID, 'option6', true );
-    $option7 = get_post_meta( $review->ID, 'option7', true );
   ?>
     <table style="width:100%;">
         <tr>
@@ -69,21 +64,6 @@ function display_slider_meta_box( $review ) {
         </tr>
 		    <tr>
 		        <td><input type="text"  style="width:100%;" placeholder="Drugi tekst" name="option2" value="<?php echo $option2; ?>" /></td>
-		    </tr>
-		    <tr>
-		        <td><input type="text"  style="width:100%;" placeholder="Trzeci tekst" name="option3" value="<?php echo $option3; ?>" /></td>
-		    </tr>
-		    <tr>
-		        <td><input type="text"  style="width:100%;" placeholder="Czwarty tekst" name="option4" value="<?php echo $option4; ?>" /></td>
-		    </tr>
-		    <tr>
-		        <td><input type="text"  style="width:100%;" placeholder="Piąty tekst" name="option5" value="<?php echo $option5; ?>" /></td>
-		    </tr>
-		    <tr>
-		        <td><input type="text"  style="width:100%;" placeholder="Szósty tekst" name="option6" value="<?php echo $option6; ?>" /></td>
-		    </tr>
-		    <tr>
-		        <td><input type="text"  style="width:100%;" placeholder="Siódmy tekst" name="option7" value="<?php echo $option7; ?>" /></td>
 		    </tr>
     </table>
     <?php
@@ -173,21 +153,6 @@ function add_slider_fields( $slider_id, $slider ) {
         }
         if ( isset( $_POST['option2'] ) && $_POST['option2'] != '' ) {
             update_post_meta( $slider_id, 'option2', $_POST['option2'] );
-        }
-        if ( isset( $_POST['option3'] ) && $_POST['option3'] != '' ) {
-            update_post_meta( $slider_id, 'option3', $_POST['option3'] );
-        }
-        if ( isset( $_POST['option4'] ) && $_POST['option4'] != '' ) {
-            update_post_meta( $slider_id, 'option4', $_POST['option4'] );
-        }
-        if ( isset( $_POST['option5'] ) && $_POST['option5'] != '' ) {
-            update_post_meta( $slider_id, 'option5', $_POST['option5'] );
-        }
-        if ( isset( $_POST['option6'] ) && $_POST['option6'] != '' ) {
-            update_post_meta( $slider_id, 'option6', $_POST['option6'] );
-        }
-        if ( isset( $_POST['option7'] ) && $_POST['option7'] != '' ) {
-            update_post_meta( $slider_id, 'option7', $_POST['option7'] );
         }
         if ( isset( $_POST['txt_upload_image'] ) && $_POST['txt_upload_image'] != '' ) {
             update_post_meta( $slider_id, 'slider_image', $_POST['txt_upload_image']);

@@ -14,7 +14,7 @@ $ git clone git@github.com:piotrseed/sedit.git
 
 ## Przykład użycia
 
-1.  Ponyższy kod należy użyć w `functions.php`
+Ponyższy kod należy użyć w `functions.php`
 
 ```php
 include 'sedit/core.php';
@@ -49,5 +49,13 @@ $tabs = [
 
 $sedit = new seditTabs();
 $sedit->pageTabsData($tabs);
+```
 
+## Slidert
+
+Ponyższy kod należy użyć w `functions.php`
+
+```php
+$sedit = new seditSlider();
+$sedit->addSlider();
 ```
