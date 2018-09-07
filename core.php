@@ -2,7 +2,6 @@
 // dołączenie wszytkich modułów
 require_once 'atomsClass.php';
 require_once 'tabsClass.php';
-include 'hooks.php';
 include 'slider.php';
 add_action( 'admin_enqueue_scripts', 'load_custom_wp_admin_style' );
 // dodatki dla admina
