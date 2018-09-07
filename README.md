@@ -51,7 +51,7 @@ $sedit = new seditTabs();
 $sedit->pageTabsData($tabs);
 ```
 
-## Slidert
+## Slider
 
 Ponyższy kod należy użyć w `functions.php`
 
