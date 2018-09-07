@@ -1,14 +1,5 @@
 jQuery(document).ready(function($) {
 
-  
-  $('.dashicons-welcome-widgets-menus').click(function() {
-    $('.fa-copy').slideToggle(0);
-  });
-
-  $('.fa-copy').click(function() {
-    $(this).css('color', '#9ECD7C');
-  });
-
   $("#top-slider").responsiveSlides({
     pager: true,
     timeout: 4000,

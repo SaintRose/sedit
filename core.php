@@ -31,8 +31,6 @@ function theme_enqueue_styles() {
 		wp_enqueue_script( 'codee', get_template_directory_uri() . '/sedit/assets/js/code-style.js', false, '1.0.0' );
 		echo '
 		<script type="text/javascript">
-
-
 		function initMap() {
 			var myLatLng = {
 				lat: 50.060930,
