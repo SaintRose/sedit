@@ -11,30 +11,55 @@ function load_custom_wp_admin_style() {
  	wp_enqueue_script( 'wp-media', get_template_directory_uri() . '/sedit/assets/js/wp-media.js', false, '1.0.0' );
  	wp_enqueue_script( 'clipboard.min', get_template_directory_uri() . '/sedit/assets/js/clipboard.min.js', false, '1.0.0' );
  	wp_enqueue_script( 'code', get_template_directory_uri() . '/sedit/assets/js/code.js', false, '1.0.0' );
+ 	wp_enqueue_script( 'codest', get_template_directory_uri() . '/sedit/assets/js/code-style.js', false, '1.0.0' );
 	wp_enqueue_style( 'style-admin', get_template_directory_uri() . '/sedit/assets/css/style-admin.css', false, '' );
+	wp_enqueue_script( 'responsiveslides.min', get_template_directory_uri() . '/sedit/assets/js/responsiveslides.min.js', false, '1.0.0' );
+	wp_enqueue_script( 'slick', get_template_directory_uri() . '/sedit/assets/js/slick.js', false, '1.0.0' );
 }
 
 
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
 // dodatki dla stylu
 function theme_enqueue_styles() {
+		wp_enqueue_script( 'jquery.min', get_template_directory_uri() . '/sedit/assets/js/jquery.min.js', false, '1.0.0' );
 		wp_enqueue_style( 'style-slider', get_template_directory_uri() . '/sedit/assets/css/slider.css', false, '' );
     wp_enqueue_style( 'style', get_template_directory_uri() . '/style.css', false, '' );
-		wp_enqueue_script( 'jquery.min', get_template_directory_uri() . '/sedit/assets/js/jquery.min.js', false, '3.3.1' );
 		wp_enqueue_script( 'responsiveslides.min', get_template_directory_uri() . '/sedit/assets/js/responsiveslides.min.js', false, '1.0.0' );
 		wp_enqueue_script( 'googlemap', get_template_directory_uri() . '/sedit/assets/js/googlemap.js', false, '1.0.0' );
 		wp_enqueue_script( 'slick', get_template_directory_uri() . '/sedit/assets/js/slick.js', false, '1.0.0' );
 		wp_enqueue_script( 'rodo', get_template_directory_uri() . '/sedit/assets/js/rodo.js', false, '1.0.0' );
-		wp_enqueue_script( 'code', get_template_directory_uri() . '/sedit/assets/js/code-style.js', false, '1.0.0' );
+		wp_enqueue_script( 'codee', get_template_directory_uri() . '/sedit/assets/js/code-style.js', false, '1.0.0' );
 		echo '
 		<script type="text/javascript">
-			var map;
-			function initMap() {
-				map = new google.maps.Map(document.getElementById("map"), {
-					center: {lat: -34.397, lng: 150.644},
-					zoom: 8
+
+
+		function initMap() {
+			var myLatLng = {
+				lat: 50.060930,
+				lng: 21.953305
+			};
+			var map = new google.maps.Map(document.getElementById("map"), {
+				zoom: 15,
+				center: myLatLng,
+				zoomControl: true,
+				scaleControl: true,
+				scrollwheel: false,
+				disableDoubleClickZoom: true
+			});
+			var image = "http://respan.big07.pl/images/marker.png";
+			var marker = new google.maps.Marker({
+				position: myLatLng,
+				map: map,
+				icon: image
+			});
+
+
+			google.maps.event.addListener(map, "click", function(event) {
+				this.setOptions({
+					scrollwheel: true
 				});
-			}
+			});
+		}
 		</script>
 		';
 }

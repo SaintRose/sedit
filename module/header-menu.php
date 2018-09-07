@@ -1,6 +1,6 @@
 <div class="header_menu">
 		<ul>
-			<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img class="logo" src="<?php echo get_image_option('link', 'img_logo', 'thumb350', false); ?>" alt=""></a>
+			<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img class="logo" src="<?php echo get_image_option('link', 'logo', 'thumb350', false); ?>" alt=""></a>
 		</ul>
 		<ul>
 			<div id="menu-top">

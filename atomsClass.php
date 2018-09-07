@@ -82,22 +82,25 @@ class seditAtoms
 		<tr>
 			<th scope="row"><label for="option">'.$title.'</label></th>
 			<td class="term-group-'.$random .'">
+
 				<input
 					name="'.$option['name'].'"
 					id="'.$option['name'].'"
 					value="'.get_multi_info(null, $option['name'], "value", null, $random).'"
 					class="regular-text"
 					type="hidden">
+
 				<button
 					type="button"
 					data-id="'.$random .'"
 					class="button addSingleMedia"
 					data-media-uploader-target="#'.$option['name'].'"
 					><i class="fas fa-images"></i> Wybierz z biblioteki</button>
-					<i class="fas fa-copy copy"  data-clipboard-action="copy" data-clipboard-target="#copy-'.$option['name'].'"></i>
+
+				<i class="fas fa-copy copy"  data-clipboard-action="copy" data-clipboard-target="#copy-'.$option['name'].'"></i>
 				<p class="description" style="margin:0 0 5px 0;">'.$option['description'].'</p>
 				<p class="front-code-php">
-					<label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo get_multi_info(null, \''.$option['name'].'\', \'image\', \'thumb350\', $random); ?>').'</label>
+					<label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo get_image_option(\'link\', \''.$option['name'].'\', \'thumb350\', false); ?>').'</label>
 				</p>
 				'.get_multi_info(null, $option['name'], 'image', 'thumb350', $random).'
 			</td>

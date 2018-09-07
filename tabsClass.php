@@ -36,6 +36,7 @@ class seditTabs extends seditAtoms
 				<?php
 					foreach ($this->tabs as $key => $value) {
 						echo '<a href="?page=ustawienia&tab='.$key.'" class="nav-tab '.($active_tab == $key ? 'nav-tab-active' : '').'">'.$key.'</a>';
+
 					}
 				 ?>
 			</div>
@@ -77,12 +78,20 @@ class seditTabs extends seditAtoms
 							}
 						}
 					}
+					if (!empty($active_tab)) {
+						echo '
+						<tr>
+							<td>
+								<input name="submit" id="submit" class="button button-primary" value="Zapisz zmiany" type="submit">
+							</td>
+						</tr>
+							';
+					}else{
+						echo '<h3>Witamy w panelu zarządzania treściami</h3>';
+						echo '<p>Wybierz odpowiednią zakładkę, aby edytować treści</p>';
+					}
 					 ?>
-					 <tr>
-						<td>
-							<input name="submit" id="submit" class="button button-primary" value="Zapisz zmiany" type="submit">
-						</td>
-					</tr>
+
 				</tbody>
 			</table>
 		</form>
