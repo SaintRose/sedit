@@ -27,9 +27,9 @@ class seditAtoms
 					placeholder="'.$option['placeholder'].'">
 				<i class="fas fa-copy copy"  data-clipboard-action="copy" data-clipboard-target="#copy-'.$option['name'].'"></i>
 				<p class="description">'.$option['description'].'</p>
-				<p class="front-code-php">
+				<l class="front-code-php">
 					<label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo get_option(\''.$option['name'].'\'); ?>').'</label>
-				</p>
+				</l>
 			</td>
 		</tr>
 		';
@@ -52,9 +52,9 @@ class seditAtoms
 					>'.get_option($option['name']).'</textarea>
 				<i class="fas fa-copy copy"  data-clipboard-action="copy" data-clipboard-target="#copy-'.$option['name'].'"></i>
 				<p class="description">'.$option['description'].'</p>
-				<p class="front-code-php">
+				<l class="front-code-php">
 					<label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo get_option(\''.$option['name'].'\'); ?>').'</label>
-				</p>
+				</l>
 			</td>
 		</tr>
 		';
@@ -77,6 +77,9 @@ class seditAtoms
 // IMAGE
 	function atomImage($title, $option){
 		save_option($option['name'], null);
+		if ($option['size'] === 'marker') {
+			$size = 'marker';
+		}
 		$random = rand(0, 10000);
 		$atom = '
 		<tr>
@@ -99,10 +102,17 @@ class seditAtoms
 
 				<i class="fas fa-copy copy"  data-clipboard-action="copy" data-clipboard-target="#copy-'.$option['name'].'"></i>
 				<p class="description" style="margin:0 0 5px 0;">'.$option['description'].'</p>
+<<<<<<< HEAD
+				<l class="front-code-php">
+					<label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo get_multi_info(null, \''.$option['name'].'\', \'image\', \'thumb350\', null); ?>').'</label>
+				</l>
+				'.get_multi_info(null, $option['name'], 'image', $size, $random).'
+=======
 				<p class="front-code-php">
 					<label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo get_image_option(\'link\', \''.$option['name'].'\', \'thumb350\', false); ?>').'</label>
 				</p>
 				'.get_multi_info(null, $option['name'], 'image', 'thumb350', $random).'
+>>>>>>> 183c1b3ee5f71813ce6e3cb9097cc0a09e066f2b
 			</td>
 		</tr>
 		';

@@ -68,7 +68,7 @@ class seditTabs extends seditAtoms
 										echo seditAtoms::atomSeparator($title, $option);
 										break;
 									case 'module:google':
-										echo seditModules::moduleGoogle($title);
+										echo seditModules::moduleGoogle();
 										break;
 									default:
 										echo seditAtoms::atomError($title, $option);

@@ -25,9 +25,11 @@ function theme_enqueue_styles() {
 		wp_enqueue_style( 'style-slider', get_template_directory_uri() . '/sedit/assets/css/slider.css', false, '' );
     wp_enqueue_style( 'style', get_template_directory_uri() . '/style.css', false, '' );
 		wp_enqueue_script( 'responsiveslides.min', get_template_directory_uri() . '/sedit/assets/js/responsiveslides.min.js', false, '1.0.0' );
-		wp_enqueue_script( 'googlemap', get_template_directory_uri() . '/sedit/assets/js/googlemap.js', false, '1.0.0' );
 		wp_enqueue_script( 'slick', get_template_directory_uri() . '/sedit/assets/js/slick.js', false, '1.0.0' );
 		wp_enqueue_script( 'rodo', get_template_directory_uri() . '/sedit/assets/js/rodo.js', false, '1.0.0' );
+<<<<<<< HEAD
+		wp_enqueue_script( 'code', get_template_directory_uri() . '/sedit/assets/js/code-style.js', false, '1.0.0' );
+=======
 		wp_enqueue_script( 'codee', get_template_directory_uri() . '/sedit/assets/js/code-style.js', false, '1.0.0' );
 		echo '
 		<script type="text/javascript">
@@ -60,8 +62,10 @@ function theme_enqueue_styles() {
 		}
 		</script>
 		';
+>>>>>>> 183c1b3ee5f71813ce6e3cb9097cc0a09e066f2b
 }
 
+add_image_size( 'marker', 64, false );
 add_image_size( 'thumb100', 100, 100, true );
 add_image_size( 'thumb300', 300, 300, true );
 add_image_size( 'thumb350', 350, false );
@@ -101,11 +105,21 @@ function get_multi_info($post_type_id, $name, $type, $size, $id){
 			$text = '<img class="hide-img hide-img-'.$id.'"  data-media-uploader-target="#img_logo" src="'.$url_img[0].'">';
 			return $text;
 			break;
+
+		case 'link':
+			if ($up_img) {
+				$url_img = wp_get_attachment_image_src($up_img, $size, false)[0];
+			}
+			return $url_img;
+			break;
 	}
 }
 //////////////Pobranie pobranie konkretnego obrazka///////////////
 function get_image_option($type, $name, $size, $crop){
-// img = src, link = link file
+// TYPE img lub mysqli_get_links_stats
+// NAME nazwa zmiennej
+// SIZE rozmiar full = oryginalny rozmiar
+// CROP kadrowanie true lub false
   $id_image = get_option($name);
   $url_img = wp_get_attachment_image_src($id_image, $size, $crop);
 	switch ($type) {
@@ -136,3 +150,29 @@ function string_for_save($string){
   $string = preg_replace_callback('#(['.$znaki.'])\1{'.$powtorzen.',}#', create_function('$a', 'return substr($a[0], 0,'.$powtorzen.');'), $string);
   return $string;
 }
+/////////////////////////////INNE//////////////////////////////////
+function new_dashboard_home($username, $user){
+    if(array_key_exists('administrator', $user->caps)){
+        wp_redirect(admin_url('admin.php?page=ustawienia', 'http'), 301);
+        exit;
+    }
+}
+add_action('wp_login', 'new_dashboard_home', 10, 2);
+function my_login_logo() {
+	if (get_multi_info(null, 'logo', 'link', 'full', null)) {
+		$logo = 'background-image: url('.get_multi_info(null, 'logo', 'link', 'full', null).');';
+	}else{
+		$logo = 'background-image: url('.get_stylesheet_directory_uri().'/sedit/images/logo.png);';
+	}
+	?>
+    <style type="text/css">
+        #login h1 a, .login h1 a {
+					<?php echo $logo; ?>
+					height:80px;
+					width:320px;
+					background-size: auto 80px;
+					background-repeat: no-repeat;
+        }
+    </style>
+<?php }
+add_action( 'login_enqueue_scripts', 'my_login_logo' );
