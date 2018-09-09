@@ -76,13 +76,15 @@ class seditTabs extends seditAtoms
 								echo $text;
 							}
 						}
+						echo '
+						<tr>
+	 						<td>
+	 							<input name="submit" id="submit" class="button button-primary" value="Zapisz zmiany" type="submit">
+	 						</td>
+	 					</tr>
+						';
 					}
 					 ?>
-					 <tr>
-						<td>
-							<input name="submit" id="submit" class="button button-primary" value="Zapisz zmiany" type="submit">
-						</td>
-					</tr>
 				</tbody>
 			</table>
 		</form>
