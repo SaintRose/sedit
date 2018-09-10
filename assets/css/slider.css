@@ -66,25 +66,34 @@
 }
 
 .rslides_tabs li {
-  display: inline-block;
+  display: block;
   color:#fff;
   font-size: 16px;
 }
-
+@media only screen and (max-width:1100px) {
+  .rslides_tabs li {
+    display: inline-block;
+  }
+}
 .slider_tabs li:first-child {
   margin-left: 0;
 }
 
 .rslides_tabs a {
-  color: #FFFFFF;
-  display: none;
-  padding: 3px 6px;
-  font-size: 16px;
+  border: 1px solid #ffffff;
+  display: block;
+  padding: 0;
+  border-radius: 10px;
+  font-size: 0;
+  width: 10px;
+  height:10px;
+  margin: 10px 5px;
 }
 
 .rslides_tabs .rslides_here a {
   color: #f36523;
   display: block;
+  background: #FFFFFF;
 }
 
 /******************************************************/
@@ -96,7 +105,7 @@
 #top-slider li{
   height: auto;
   display: block;
-  height: 100vh;
+  height: 80vh;
   position: relative;
   align-content: space-around;
 }

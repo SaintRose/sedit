@@ -11,9 +11,6 @@ jQuery(document).ready(function($) {
     $(".menu").slideToggle(100);
   });
 
-  $('.rslides_tabs li a').prepend('0');
-  var count = $('.rslides_tabs li').children().length;
-  $('.rslides_tabs').append('<li> / 0' + count + '</li>');
 
 
 

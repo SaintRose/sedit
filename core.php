@@ -29,9 +29,11 @@ function theme_enqueue_styles() {
 
 add_image_size( 'marker', 64, false );
 add_image_size( 'thumb100', 100, 100, true );
+add_image_size( 'thumb120', 120, 120, true );
 add_image_size( 'thumb300', 300, 300, true );
 add_image_size( 'thumb350', 350, false );
 add_image_size( 'thumb500', 500, 500, true );
+add_image_size( 'thumb530', 530, 430, true );
 add_image_size( 'thumb200x80', 200, 80, true );
 add_theme_support( 'post-thumbnails' );
 
@@ -121,11 +123,9 @@ function new_dashboard_home($username, $user){
 }
 add_action('wp_login', 'new_dashboard_home', 10, 2);
 function my_login_logo() {
-	if (get_multi_info(null, 'logo', 'link', 'full', null)) {
-		$logo = 'background-image: url('.get_multi_info(null, 'logo', 'link', 'full', null).');';
-	}else{
+	
 		$logo = 'background-image: url('.get_stylesheet_directory_uri().'/sedit/images/logo.png);';
-	}
+
 	?>
     <style type="text/css">
         #login h1 a, .login h1 a {
