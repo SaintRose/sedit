@@ -12,6 +12,7 @@ class seditTabs extends seditAtoms
 	function __construct()
 	{
 		add_action('admin_menu', array($this, 'pageInit'));
+		
 	}
 
 	function pageInit(){
