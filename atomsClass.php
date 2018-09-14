@@ -146,4 +146,38 @@ class seditAtoms
 		';
 		return $atom;
 	}
+	// LINK
+		function atomLink($title, $option){
+			save_option($option['name'], null);
+		/*
+		$args = array(
+		'depth'                 => 0,
+		'child_of'              => 0,
+		'selected'              => $option['name'],
+		'echo'                  => 0,
+		'name'                  => $option['name'],
+		'id'                    => null,
+		'class'                 => null,
+		'show_option_none'      => null,
+		'show_option_no_change' => null,
+		'option_none_value'     => null);
+		'.wp_dropdown_pages($args).'
+		*/
+
+			$atom = '
+			<tr>
+				<th scope="row"><label for="option">'.$title.'</label></th>
+				<td>
+				<input
+					name="'.$option['name'].'"
+					id="'.$option['name'].'"
+					value="'.get_option($option['name']).'"
+					class="regular-text"
+					type="text"
+					placeholder="'.$option['placeholder'].'">
+				</td>
+			</tr>
+			';
+			return $atom;
+		}
 }

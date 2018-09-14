@@ -12,7 +12,7 @@ class seditTabs extends seditAtoms
 	function __construct()
 	{
 		add_action('admin_menu', array($this, 'pageInit'));
-		
+
 	}
 
 	function pageInit(){
@@ -66,6 +66,9 @@ class seditTabs extends seditAtoms
 										break;
 									case 'separator':
 										echo seditAtoms::atomSeparator($title, $option);
+										break;
+									case 'link':
+										echo seditAtoms::atomLink($title, $option);
 										break;
 									case 'module:google':
 										echo seditModules::moduleGoogle();
