@@ -1,8 +1,20 @@
 <?php
-// dołączenie wszytkich modułów
 require_once 'atomsClass.php';
 require_once 'tabsClass.php';
+require_once 'pagesClass.php';
 include 'slider.php';
+use SEDIT\seditPages;
+use SEDIT\seditTabs;
+use SEDIT\seditAtoms;
+
+$sTabs = new seditTabs();
+$sPages = new seditPages();
+
+
+
+
+
+
 add_action( 'admin_enqueue_scripts', 'load_custom_wp_admin_style' );
 // dodatki dla admina
 function load_custom_wp_admin_style() {
@@ -40,7 +52,13 @@ add_theme_support( 'post-thumbnails' );
 //////////////Zapisanie ustawień///////////////
 function save_option($name, $type){
 	if ( isset( $_POST['submit'] ) && $_POST['submit'] != '' ) {
-			update_option( $name.$type, $_POST[$name] );
+			if (is_array($_POST[$name])) {
+				foreach ($_POST[$name] as $img_key => $img_value) {
+					$idimg .= $img_value.',';
+				}
+				$_POST[$name] = $idimg;
+		}
+	update_option( $name.$type, $_POST[$name] );
 	}
 }
 //////////////Pobranie multi info///////////////
@@ -60,6 +78,21 @@ function get_multi_info($post_type_id, $name, $type, $size, $id){
 				return $up_img;
 			break;
 
+		case 'file':
+			if ($up_img) {
+				$url_img = wp_get_attachment_url( $up_img );
+			}
+			$text = '<a class="hide-img hide-img-'.$id.'" href="'.$url_img.'">Podgląd</a>';
+			return $text;
+			break;
+
+		case 'filelink':
+			if ($up_img) {
+				$url_img = wp_get_attachment_url( $up_img );
+			}
+			return $url_img;
+			break;
+
 		case 'image':
 			if ($up_img) {
 				$url_img = wp_get_attachment_image_src($up_img, $size, false);
@@ -67,6 +100,20 @@ function get_multi_info($post_type_id, $name, $type, $size, $id){
 				$url_img[0] = get_stylesheet_directory_uri() . '/sedit/images/noimage.png';
 			}
 			$text = '<img class="hide-img hide-img-'.$id.'"  data-media-uploader-target="#img_logo" src="'.$url_img[0].'">';
+			return $text;
+			break;
+
+		case 'images':
+			$get_id_image = explode(",", $up_img);
+			foreach ($get_id_image as $key => $value) {
+				$image_attributes = wp_get_attachment_image_src($value, 'thumb100');
+				if ($image_attributes) {
+					$text .= '
+					<div class="sedit-img-'.$key.'">
+						<img src="'.$image_attributes[0].'">
+					</div>';
+				}
+			}
 			return $text;
 			break;
 
@@ -123,7 +170,7 @@ function new_dashboard_home($username, $user){
 }
 add_action('wp_login', 'new_dashboard_home', 10, 2);
 function my_login_logo() {
-	
+
 		$logo = 'background-image: url('.get_stylesheet_directory_uri().'/sedit/images/logo.png);';
 
 	?>
@@ -138,3 +185,28 @@ function my_login_logo() {
     </style>
 <?php }
 add_action( 'login_enqueue_scripts', 'my_login_logo' );
+
+add_action( 'admin_bar_menu', 'custom_wp_toolbar_link', 999 );
+
+function custom_wp_toolbar_link( $wp_admin_bar ) {
+    if( current_user_can( 'level_5' ) ){
+
+        $args = array(
+            'id' => 'james',
+            'title' => '<span class="ab-icon"></span><span class="ab-label">SEDIT</span>',
+            'href' => null,
+            'meta' => array(
+                'class' => 'sedit-copy',
+                'title' => 'Skopiuj, aby umieścić na stronie.'
+            )
+        );
+        $wp_admin_bar->add_node($args);
+
+    }
+}
+
+add_action( 'admin_bar_menu', 'remove_wp_logo', 999 );
+
+function remove_wp_logo( $wp_admin_bar ) {
+	$wp_admin_bar->remove_node( 'wp-logo' );
+}

@@ -1,5 +1,5 @@
 <?php
-namespace SEDIT\atoms;
+namespace SEDIT;
 /**
  * pojedyncze atomy dla modulow
  */
@@ -11,8 +11,7 @@ class seditAtoms
 		// code
 	}
 // INPUT
-	function atomInput($title, $option){
-		save_option($option['name'], null);
+	public function atomInput($postID, $title, $option){
 		$atom = null;
 		$atom = '
 		<tr>
@@ -36,8 +35,7 @@ class seditAtoms
 		return $atom;
 	}
 // TEXTAREA
-	function atomTextarea($title, $option){
-		save_option($option['name'], null);
+	function atomTextarea($postID, $title, $option){
 		$atom = null;
 		$atom = '
 		<tr>
@@ -61,8 +59,7 @@ class seditAtoms
 		return $atom;
 	}
 // WPEDITOR
-	function atomWpeditor($title, $option){
-		save_option($option['name'], null);
+	function atomWpeditor($postID, $title, $option){
 		$atom = null;
 		$atom = '
 		<tr>
@@ -75,8 +72,7 @@ class seditAtoms
 		return $atom;
 	}
 // IMAGE
-	function atomImage($title, $option){
-		save_option($option['name'], null);
+	function atomImage($postID, $title, $option){
 		if ($option['size'] === 'marker') {
 			$size = 'marker';
 		}
@@ -88,7 +84,7 @@ class seditAtoms
 				<input
 					name="'.$option['name'].'"
 					id="'.$option['name'].'"
-					value="'.get_multi_info(null, $option['name'], "value", null, $random).'"
+					value="'.get_multi_info($postID, $option['name'], "value", null, $random).'"
 					class="regular-text"
 					type="hidden">
 				<button
@@ -102,12 +98,96 @@ class seditAtoms
 				<l class="front-code-php">
 					<label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo get_multi_info(null, \''.$option['name'].'\', \'image\', \'thumb350\', null); ?>').'</label>
 				</l>
-				'.get_multi_info(null, $option['name'], 'image', $size, $random).'
+				'.get_multi_info($postID, $option['name'], 'image', $size, $random).'
 			</td>
 		</tr>
 		';
 		return $atom;
 	}
+	// IMAGES
+		function atomImages($postID, $title, $option){
+			if ($option['size'] === 'marker') {
+				$size = 'marker';
+			}
+
+			$random = rand(0, 10000);
+			$atom = '
+			<tr>
+				<th scope="row"><label for="option">'.$title.'</label></th>
+				<td class="term-group-'.$random .'">
+					<input
+						name="'.$option['name'].'"
+						id="'.$option['name'].'"
+						value="'.get_multi_info($postID, $option['name'], "value", null, null).'"
+						class="regular-text"
+						type="hidden">
+					<button
+						type="button"
+						data-id="'.$random .'"
+						class="button addMultiMedia"
+						data-media-uploader-target="#'.$option['name'].'"
+						data-name-field="'.$option['name'].'"
+						><i class="fas fa-images"></i> Wybierz z biblioteki</button>
+						<i class="fas fa-copy copy"  data-clipboard-action="copy" data-clipboard-target="#copy-'.$option['name'].'"></i>
+					<p class="description" style="margin:0 0 5px 0;">'.$option['description'].'</p>
+					<l class="front-code-php">
+						<label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo get_multi_info(null, \''.$option['name'].'\', \'images\', \'thumb350\', null); ?>').'</label>
+					</l>
+					<div class="sort-images">';
+          $get_id_image = explode(",", get_multi_info($postID, $option['name'], "value", null, null));
+          foreach ($get_id_image as $key => $value) {
+            $image_attributes = wp_get_attachment_image_src($value, 'thumb100');
+						$rand = rand(0, 10000);
+            if ($image_attributes) {
+              $atom .= '
+							<div class="image-'.$rand.' image-theme">
+								<input name="'.$option['name'].'[]" class="'.$rand.'-trash" value="'.$value.'" type="hidden">
+								<img src="'.$image_attributes[0].'">
+								<div data-id="'.$rand.'" data-crash=".'.$rand.'-trash" class="image-remove"><i class="fas fa-trash"></i></div>
+							</div>';
+            }
+          }
+
+				$atom .= '
+				</div>
+				</td>
+			</tr>
+			';
+			return $atom;
+		}
+	// FILE
+		function atomFile($postID, $title, $option){
+			if ($option['size'] === 'marker') {
+				$size = 'marker';
+			}
+			$random = rand(0, 10000);
+			$atom = '
+			<tr>
+				<th scope="row"><label for="option">'.$title.'</label></th>
+				<td class="term-group-'.$random .'">
+					<input
+						name="'.$option['name'].'"
+						id="'.$option['name'].'"
+						value="'.get_multi_info($postID, $option['name'], "value", null, $random).'"
+						class="regular-text"
+						type="hidden">
+					<button
+						type="button"
+						data-id="'.$random .'"
+						class="button addSingleMediaFile"
+						data-media-uploader-target="#'.$option['name'].'"
+						><i class="fas fa-images"></i> Wybierz z biblioteki</button>
+						<i class="fas fa-copy copy"  data-clipboard-action="copy" data-clipboard-target="#copy-'.$option['name'].'"></i>
+					<p class="description" style="margin:0 0 5px 0;">'.$option['description'].'</p>
+					<l class="front-code-php">
+						<label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo get_multi_info(null, \''.$option['name'].'\', \'file\', \'null\', null); ?>').'</label>
+					</l>
+					'.get_multi_info($postID, $option['name'], 'file', null, null).'
+				</td>
+			</tr>
+			';
+			return $atom;
+		}
 // TITLE
 	function atomTitle($title, $option){
 		$atom = '
@@ -121,18 +201,7 @@ class seditAtoms
 		';
 		return $atom;
 	}
-// SEPARATOR
-	function atomSeparator($name, $option){
-		$atom = '
-		<tr id="'.$name.'" style="height:'.$option['height'].';background:'.$option['background'].'">
-			<th scope="row"><label for="option">'.$title.'</label></th>
-			<td>
-				wp_editor pracuje nad tym...
-			</td>
-		</tr>
-		';
-		return $atom;
-	}
+
 // ERROR
 	function atomError($title, $option){
 		$atom = '
@@ -147,8 +216,7 @@ class seditAtoms
 		return $atom;
 	}
 	// LINK
-		function atomLink($title, $option){
-			save_option($option['name'], null);
+		function atomLink($postID, $title, $option){
 		/*
 		$args = array(
 		'depth'                 => 0,
@@ -179,5 +247,57 @@ class seditAtoms
 			</tr>
 			';
 			return $atom;
+		}
+
+		function switch_atoms($dataSwitch){
+			foreach ($dataSwitch as $key => $value) {
+					foreach ($value as $title => $option) {
+						$text = null;
+						switch ($option['type']) {
+							case 'input':
+								save_option($option['name'], null);
+								echo $this->atomInput($post->ID, $title, $option);
+								break;
+							case 'textarea':
+								save_option($option['name'], null);
+								echo $this->atomTextarea($post->ID, $title, $option);
+								break;
+							case 'wpeditor':
+								save_option($option['name'], null);
+								echo $this->atomWpeditor($post->ID, $title, $option);
+								break;
+							case 'image':
+								save_option($option['name'], null);
+								echo $this->atomImage($post->ID, $title, $option);
+								break;
+							case 'images':
+								save_option($option['name'], null);
+								echo $this->atomImages($post->ID, $title, $option);
+								break;
+							case 'title':
+								echo $this->atomTitle($title, $option);
+								break;
+							case 'link':
+								save_option($option['name'], null);
+								echo $this->atomLink($post->ID, $title, $option);
+								break;
+							case 'module:google':
+								save_option($option['name'], null);
+							//	echo seditModules::moduleGoogle();
+								break;
+							default:
+								echo $this->atomError($title, $option);
+							break;
+						}
+						echo $text;
+					}
+					echo '
+					<tr>
+						<td>
+							<input name="submit" id="submit" class="button button-primary" value="Zapisz zmiany" type="submit">
+						</td>
+					</tr>
+					';
+			}
 		}
 }

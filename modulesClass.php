@@ -1,7 +1,7 @@
 <?php
-require_once 'atomsClass.php';
 
-use SEDIT\atoms\seditAtoms;
+require_once 'atomsClass.php';
+use SEDIT\seditAtoms;
 /**
  * Module
  */
@@ -12,10 +12,6 @@ class seditModules extends seditAtoms
 
 	function __construct()
 	{
-		//add_action( 'admin_enqueue_scripts', 'javascript_googlemap' );
-		//add_action( 'wp_enqueue_scripts', 'javascript_googlemap' );
-		//add_shortcode( 'googlemap' , 'javascript_googlemap' );
-
 
 	}
 ///////////////////////Google Maps//////////////////////////
@@ -79,6 +75,7 @@ class seditModules extends seditAtoms
 			'placeholder' => '55.038423',
 			'description' => 'Położenie na osi x'
 		];
+    save_option($args['name'], null);
 		$module .= seditAtoms::atomInput('Współrzędna X', $args);
 
 		$args = [
@@ -86,6 +83,7 @@ class seditModules extends seditAtoms
 			'placeholder' => '21.982128',
 			'description' => 'Położenie na osi y'
 		];
+    save_option($args['name'], null);
 		$module .= seditAtoms::atomInput('Współrzędna Y', $args);
 
 		$args = [
@@ -93,6 +91,7 @@ class seditModules extends seditAtoms
 			'placeholder' => 'AIzaSyC_xl2eHSi5uhXLqW9z8PZY3XDs68asYsM',
 			'description' => 'API uzyskanie po rejestracji w Google'
 		];
+    save_option($args['name'], null);
 		$module .= seditAtoms::atomInput('API Key', $args);
 
 		$args = [
@@ -100,6 +99,7 @@ class seditModules extends seditAtoms
 			'size' => 'marker',
 			'description' => 'Zalecane rozmiary maximum 64x64'
 		];
+    save_option($args['name'], null);
 		$module .= seditAtoms::atomImage('Marker', $args);
 
 		$args = [
@@ -107,6 +107,7 @@ class seditModules extends seditAtoms
 			'placeholder' => '1 - 20',
 			'description' => 'Wybierz poziom zblizenia 1 do 20'
 		];
+    save_option($args['name'], null);
 		$module .= seditAtoms::atomInput('Widoczny obszar', $args);
 
 		$args = [
@@ -114,6 +115,7 @@ class seditModules extends seditAtoms
 			'placeholder' => 'https://www.google.com/maps/place/...',
 			'description' => 'Przejdz pod adres po kliknięciu w marker'
 		];
+    save_option($args['name'], null);
 		$module .= seditAtoms::atomInput('Odnośnik', $args);
 
 		$module .= '
