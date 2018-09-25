@@ -18,36 +18,88 @@ $ git clone git@github.com:piotrseed/sedit.git
 
 ```php
 include 'sedit/core.php';
-$tabs = [
 
-	'Zakładka 1' => [
-		'Imię' => [
-			'name' => 'name',
-			'type' => 'input',
-			'placeholder' => 'Imię i nazwisko',
-			'description' => 'Proszę uzupełnić dane'
-			],
-		'Zdjęcie' => [
-			'name' => 'foto',
-			'type' => 'image',
-			'description' => 'Kliknij aby wybrać z biblioteki mediów.'
-			],
-		'Przykładowy opis' => [
-			'name' => 'opis',
-			'type' => 'textarea',
-			'description' => 'Uzupełnij to pole'
+register_nav_menus( array(
+	'top'    => 'Menu główne'
+) );
+
+$sTabs->pageTabsData([
+
+	'Przykładowa' => [
+		'title' => 'jakiś tytuł',
+		'description' => 'główny opis dla sekcji',
+		'function_before' => 'przed',
+		'function_after' => 'po',
+		'atoms' => [
+			'Imię' => [
+				'name' => 'logo',
+				'type' => 'image',
+				'placeholder' => 'Imię i nazwisko',
+				'description' => 'Proszę uzupełnić dane',
+				'function' => 'mojafunkcja'
+				],
+			'Zdjęcie' => [
+				'name' => 'foto',
+				'type' => 'input',
+				'description' => 'Kliknij aby wybrać z biblioteki mediów.'
+				],
+			'Przykładowy opis' => [
+				'name' => 'opis',
+				'type' => 'images',
+				'description' => 'Uzupełnij to pole'
+				]
 			]
-		],
+	],
 
-	'Testowy moduł' => [
-		'mod1' => [
-			'name' => 'googlemap',
-			'type' => 'module:google'
+	'Najnowsza' => [
+		'title' => 'jakiś tytuł',
+		'description' => 'główny opis dla sekcji',
+		'atoms' => [
+			'Google' => [
+				'name' => 'googlecddss',
+				'type' => 'module:google',
+				'placeholder' => 'Imię i nazwisko',
+				'description' => 'Proszę uzupełnić dane'
+				]
 			]
-		]
-];
+	]
 
-$sedit = new seditTabs();
-$sedit->pageTabsData($tabs);
+]);
+
+$sPages->pageData([
+
+	'chuj wie' => [
+		'title' => 'Przykładowa strona',
+		'description' => 'opis dla sekcji',
+		'dashicons' => 'dashicons-format-status',
+		'function_before' => 'przed',
+		'function_after' => 'po',
+		'atoms' => [
+			'Imię' => [
+				'name' => 'logoaaa',
+				'type' => 'input',
+				'placeholder' => 'Imię i nazwisko',
+				'description' => 'Proszę uzupełnić dane',
+				'function_before' => 'przed',
+				'function_after' => 'po',
+				]
+			]
+	],
+
+	'Najnowsza' => [
+		'title' => 'jakiś tytuł',
+		'description' => 'główny opis dla sekcji',
+		'dashicons' => 'dashicons-cart',
+		'atoms' => 'po'
+	]
+
+]);
+
+function przed(){
+	return 'wynik: działa przed!';
+}
+function po(){
+	return 'wynik: działa po!';
+}
 
 ```
