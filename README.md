@@ -67,7 +67,7 @@ $sTabs->pageTabsData([
 
 $sPages->pageData([
 
-	'chuj wie' => [
+	'Strona' => [
 		'title' => 'Przykładowa strona',
 		'description' => 'opis dla sekcji',
 		'dashicons' => 'dashicons-format-status',
