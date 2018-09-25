@@ -36,7 +36,6 @@ $sTabs->pageTabsData([
 				'type' => 'image',
 				'placeholder' => 'Imię i nazwisko',
 				'description' => 'Proszę uzupełnić dane',
-				'function' => 'mojafunkcja'
 				],
 			'Zdjęcie' => [
 				'name' => 'foto',
