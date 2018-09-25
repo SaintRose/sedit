@@ -56,10 +56,13 @@ function save_option($name, $type){
 				foreach ($_POST[$name] as $img_key => $img_value) {
 					$idimg .= $img_value.',';
 				}
+				//update_post_meta( $type, $name, $idimg);
 				$_POST[$name] = $idimg;
 		}
-	update_option( $name.$type, $_POST[$name] );
-	}
+			update_option( $name, $_POST[$name] );
+
+
+	} // do poprawi sapis dla meta post
 }
 //////////////Pobranie multi info///////////////
 // POST_TYPE_ID custom post czy ustawienia
@@ -152,7 +155,7 @@ function get_image_option($type, $name, $size, $crop){
 }
 ///////////////////////////Generowanie stringu do zapisu////////////////////////
 function string_for_save($string){
-  $string = strtr($string, 'ĘęÓóĄąŚśŁłŹźŻżĆćŃń', 'EeOoAaSsLlZzZzCcNn');
+  //$string = strtr($string, 'ĘęÓóĄąŚśŁłŹźŻżĆćŃń', 'EeOoAaSsLlZzZzCcNn');
   $string = strtr($string, 'ˇ¦¬±¶Ľ','ASZasz');
   $string = preg_replace("'[[:punct:][:space:]]'",'-',$string);
   $string = strtolower($string);

@@ -1,9 +1,11 @@
 <?php
 namespace SEDIT;
+require_once 'modulesClass.php';
+use SEDIT\seditModules;
 /**
  * pojedyncze atomy dla modulow
  */
-class seditAtoms
+class seditAtoms extends seditModules
 {
 
 	function __construct()
@@ -12,6 +14,7 @@ class seditAtoms
 	}
 // INPUT
 	public function atomInput($postID, $title, $option){
+		save_option($option['name'], $postID);
 		$atom = null;
 		$atom = '
 		<tr>
@@ -36,6 +39,7 @@ class seditAtoms
 	}
 // TEXTAREA
 	function atomTextarea($postID, $title, $option){
+		save_option($option['name'], $postID);
 		$atom = null;
 		$atom = '
 		<tr>
@@ -60,6 +64,7 @@ class seditAtoms
 	}
 // WPEDITOR
 	function atomWpeditor($postID, $title, $option){
+		save_option($option['name'], $postID);
 		$atom = null;
 		$atom = '
 		<tr>
@@ -73,6 +78,7 @@ class seditAtoms
 	}
 // IMAGE
 	function atomImage($postID, $title, $option){
+		save_option($option['name'], $postID);
 		if ($option['size'] === 'marker') {
 			$size = 'marker';
 		}
@@ -106,6 +112,7 @@ class seditAtoms
 	}
 	// IMAGES
 		function atomImages($postID, $title, $option){
+			save_option($option['name'], $postID);
 			if ($option['size'] === 'marker') {
 				$size = 'marker';
 			}
@@ -157,6 +164,7 @@ class seditAtoms
 		}
 	// FILE
 		function atomFile($postID, $title, $option){
+			save_option($option['name'], $postID);
 			if ($option['size'] === 'marker') {
 				$size = 'marker';
 			}
@@ -217,6 +225,7 @@ class seditAtoms
 	}
 	// LINK
 		function atomLink($postID, $title, $option){
+		save_option($option['name'], $postID);
 		/*
 		$args = array(
 		'depth'                 => 0,
@@ -249,55 +258,118 @@ class seditAtoms
 			return $atom;
 		}
 
-		function switch_atoms($dataSwitch){
-			foreach ($dataSwitch as $key => $value) {
-					foreach ($value as $title => $option) {
-						$text = null;
-						switch ($option['type']) {
-							case 'input':
-								save_option($option['name'], null);
-								echo $this->atomInput($post->ID, $title, $option);
-								break;
-							case 'textarea':
-								save_option($option['name'], null);
-								echo $this->atomTextarea($post->ID, $title, $option);
-								break;
-							case 'wpeditor':
-								save_option($option['name'], null);
-								echo $this->atomWpeditor($post->ID, $title, $option);
-								break;
-							case 'image':
-								save_option($option['name'], null);
-								echo $this->atomImage($post->ID, $title, $option);
-								break;
-							case 'images':
-								save_option($option['name'], null);
-								echo $this->atomImages($post->ID, $title, $option);
-								break;
-							case 'title':
-								echo $this->atomTitle($title, $option);
-								break;
-							case 'link':
-								save_option($option['name'], null);
-								echo $this->atomLink($post->ID, $title, $option);
-								break;
-							case 'module:google':
-								save_option($option['name'], null);
-							//	echo seditModules::moduleGoogle();
-								break;
-							default:
-								echo $this->atomError($title, $option);
-							break;
-						}
-						echo $text;
-					}
-					echo '
+		function switch_atoms($dataSwitch, $get_page){
+				foreach ($dataSwitch as $pageTab => $pageArray) {
+				//opisy dla sekcji
+				if (string_for_save($pageTab) === string_for_save($get_page)) {
+					$head = null;
+					$text = null;
+					// atomy
+					$head .= '
 					<tr>
+						<th scope="row"></th>
 						<td>
-							<input name="submit" id="submit" class="button button-primary" value="Zapisz zmiany" type="submit">
+							<h2>'.$pageArray['title'].$page.'</h2>
+							<p>'.$pageArray['description'].'</p>
 						</td>
 					</tr>
 					';
+					//akcja funkcji przed wszystkimi atomami
+					if (!empty($pageArray['function_before'])) {
+						$text .= '
+						<tr>
+							<td>';
+							$text .= call_user_func($pageArray['function_before']);
+						$text .= '</td>
+						</tr>
+						';
+					}
+				if (is_array($pageArray['atoms'])) {
+				foreach ($pageArray['atoms'] as $title => $option) {
+							//akcja funkcji przed atomem
+							if (!empty($option['function_before'])) {
+								$text .= '
+								<tr>
+									<td>';
+									$text .= call_user_func($option['function_before']);
+								$text .= '</td>
+								</tr>
+								';
+							}
+							// atom
+							switch ($option['type']) {
+								case 'input':
+									$text .= $this->atomInput($post->ID, $title, $option);
+									break;
+								case 'textarea':
+									$text .= $this->atomTextarea($post->ID, $title, $option);
+									break;
+								case 'wpeditor':
+									$text .= $this->atomWpeditor($post->ID, $title, $option);
+									break;
+								case 'image':
+									$text .= $this->atomImage($post->ID, $title, $option);
+									break;
+								case 'images':
+									$text .= $this->atomImages($post->ID, $title, $option);
+									break;
+								case 'title':
+									$text .= $this->atomTitle($title, $option);
+									break;
+								case 'link':
+									$text .= $this->atomLink($post->ID, $title, $option);
+									break;
+								case 'module:google':
+									$text .= seditModules::moduleGoogle();
+									break;
+								default:
+									$text .= $this->atomError($title, $option);
+								break;
+							}
+							//akcja funkcji po atome
+							if (!empty($option['function_before'])) {
+								$text .= '
+								<tr>
+									<td>';
+									$text .= call_user_func($option['function_before']);
+								$text .= '</td>
+								</tr>
+								';
+							}
+						}
+						//akcja po wszystkich atomach
+						if (!empty($pageArray['function_after'])) {
+							$text .= '
+							<tr>
+								<td>';
+								$text .= call_user_func($pageArray['function_after']);
+							$text .= '</td>
+							</tr>
+							';
+						}
+
+						$text .= '
+						<tr>
+							<td>
+								<input name="submit" id="submit" class="button button-primary" value="Zapisz zmiany" type="submit">
+							</td>
+						</tr>
+						';
+
+					}else{
+						//akcja funkcji gdy brak atomow
+						if (!empty($pageArray['atoms'])) {
+							$text .= '
+							<tr>
+								<td>';
+								$text .= call_user_func($pageArray['atoms']);
+							$text .= '</td>
+							</tr>
+							';
+						}
+					}
+					echo $head.$text;
+				}
 			}
 		}
 }

@@ -86,4 +86,5 @@
 #wpadminbar #wp-admin-bar-james .ab-icon:before {
     content: "\f475";
     top: 2px;
+    cursor: pointer;
 }

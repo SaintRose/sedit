@@ -18,7 +18,6 @@ class seditTabs extends seditAtoms
 
 	function pageInit(){
 		$title_blog = get_bloginfo('title');
-
 		add_menu_page($title_blog, $title_blog, 'manage_options', 'ustawienia', array($this, 'pageTabs'), 'dashicons-welcome-widgets-menus' ,0 );
 	}
 	// Pobranie wszytkich danych
@@ -38,8 +37,10 @@ class seditTabs extends seditAtoms
 			<?php //settings_errors(); ?>
 			<div class="nav-tab-wrapper">
 				<?php
-					foreach ($this->tabs as $key => $value) {
-						echo '<a href="?page=ustawienia&tab='.$key.'" class="nav-tab '.($active_tab == $key ? 'nav-tab-active' : '').'">'.$key.'</a>';
+					foreach ($this->tabs as $pageTab => $pageArray) {
+						$name = string_for_save($pageTab);
+						echo '<a href="?page=ustawienia&tab='.$name.'" class="nav-tab '.($active_tab == $name ? 'nav-tab-active' : '').'">'.$pageTab.'</a>';
+
 					}
 				 ?>
 			</div>
@@ -47,7 +48,9 @@ class seditTabs extends seditAtoms
 				<table class="form-table">
 					<tbody>
 					<?php
-						echo seditAtoms::switch_atoms($this->tabs);
+					//echo "<pre>";
+					//print_r($this->tabs);
+						echo seditAtoms::switch_atoms($this->tabs, $_GET['tab']);
 					 ?>
 				</tbody>
 			</table>

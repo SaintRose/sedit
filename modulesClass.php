@@ -1,18 +1,18 @@
 <?php
-
+namespace SEDIT;
 require_once 'atomsClass.php';
 use SEDIT\seditAtoms;
 /**
  * Module
  */
- add_action( 'admin_footer', array( 'seditModules', 'javascript_googlemap'));
- add_action( 'wp_footer', array( 'seditModules', 'javascript_googlemap'));
-class seditModules extends seditAtoms
+
+class seditModules
 {
 
 	function __construct()
 	{
-
+    add_action( 'admin_footer', array($this, 'javascript_googlemap'));
+    add_action( 'wp_footer', array($this, 'javascript_googlemap'));
 	}
 ///////////////////////Google Maps//////////////////////////
 	public function javascript_googlemap($grupe){
@@ -70,53 +70,43 @@ class seditModules extends seditAtoms
 		</tr>
 		';
 
-		$args = [
+
+
+		$module .= seditAtoms::atomInput(null, 'Współrzędna X', [
 			'name' => 'googlemapsx',
 			'placeholder' => '55.038423',
 			'description' => 'Położenie na osi x'
-		];
-    save_option($args['name'], null);
-		$module .= seditAtoms::atomInput('Współrzędna X', $args);
+		]);
 
-		$args = [
+		$module .= seditAtoms::atomInput(null, 'Współrzędna Y', [
 			'name' => 'googlemapsy',
 			'placeholder' => '21.982128',
 			'description' => 'Położenie na osi y'
-		];
-    save_option($args['name'], null);
-		$module .= seditAtoms::atomInput('Współrzędna Y', $args);
+		]);
 
-		$args = [
+		$module .= seditAtoms::atomInput(null, 'API Key', [
 			'name' => 'googlemapapi',
 			'placeholder' => 'AIzaSyC_xl2eHSi5uhXLqW9z8PZY3XDs68asYsM',
 			'description' => 'API uzyskanie po rejestracji w Google'
-		];
-    save_option($args['name'], null);
-		$module .= seditAtoms::atomInput('API Key', $args);
+		]);
 
-		$args = [
+		$module .= seditAtoms::atomImage(null, 'Marker', [
 			'name' => 'marker',
 			'size' => 'marker',
 			'description' => 'Zalecane rozmiary maximum 64x64'
-		];
-    save_option($args['name'], null);
-		$module .= seditAtoms::atomImage('Marker', $args);
+		]);
 
-		$args = [
+		$module .= seditAtoms::atomInput(null, 'Widoczny obszar', [
 			'name' => 'sizemap',
 			'placeholder' => '1 - 20',
 			'description' => 'Wybierz poziom zblizenia 1 do 20'
-		];
-    save_option($args['name'], null);
-		$module .= seditAtoms::atomInput('Widoczny obszar', $args);
+		]);
 
-		$args = [
+		$module .= seditAtoms::atomInput(null, 'Odnośnik', [
 			'name' => 'linkmarker',
 			'placeholder' => 'https://www.google.com/maps/place/...',
 			'description' => 'Przejdz pod adres po kliknięciu w marker'
-		];
-    save_option($args['name'], null);
-		$module .= seditAtoms::atomInput('Odnośnik', $args);
+		]);
 
 		$module .= '
 		<tr>
