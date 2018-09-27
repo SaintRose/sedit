@@ -19,7 +19,7 @@ add_action( 'admin_enqueue_scripts', 'load_custom_wp_admin_style' );
 // dodatki dla admina
 function load_custom_wp_admin_style() {
 	wp_enqueue_media();
-	wp_enqueue_style( 'font-awesome', 'https://use.fontawesome.com/releases/v5.1.0/css/all.css', false, '' );
+	wp_enqueue_style( 'font-family', get_template_directory_uri() . '/sedit/assets/css/fonts/font-family.css', false, '' );
  	wp_enqueue_script( 'wp-media', get_template_directory_uri() . '/sedit/assets/js/wp-media.js', false, '1.0.0' );
  	wp_enqueue_script( 'clipboard.min', get_template_directory_uri() . '/sedit/assets/js/clipboard.min.js', false, '1.0.0' );
  	wp_enqueue_script( 'code', get_template_directory_uri() . '/sedit/assets/js/code.js', false, '1.0.0' );

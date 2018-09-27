@@ -17,23 +17,24 @@ class seditAtoms extends seditModules
 		save_option($option['name'], $postID);
 		$atom = null;
 		$atom = '
-		<tr>
-			<th scope="row"><label for="option">'.$title.'</label></th>
-			<td>
+		<ul>
+			<li>
+				<label>'.$title.'</label>
 				<input
 					name="'.$option['name'].'"
 					id="'.$option['name'].'"
 					value="'.get_option($option['name']).'"
-					class="regular-text"
-					type="text"
-					placeholder="'.$option['placeholder'].'">
+					placeholder="'.$option['placeholder'].'"
+					type="text">
 				<i class="fas fa-copy copy"  data-clipboard-action="copy" data-clipboard-target="#copy-'.$option['name'].'"></i>
-				<p class="description">'.$option['description'].'</p>
+				<em>'.$option['description'].'</em>
+
 				<l class="front-code-php">
 					<label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo get_option(\''.$option['name'].'\'); ?>').'</label>
 				</l>
-			</td>
-		</tr>
+
+			</li>
+		</ul>
 		';
 		return $atom;
 	}
@@ -42,9 +43,9 @@ class seditAtoms extends seditModules
 		save_option($option['name'], $postID);
 		$atom = null;
 		$atom = '
-		<tr>
-			<th scope="row"><label for="option">'.$title.'</label></th>
-			<td>
+		<ul>
+			<li>
+				<label>'.$title.'</label>
 				<textarea
 					name="'.$option['name'].'"
 					id="'.$option['name'].'"
@@ -53,12 +54,14 @@ class seditAtoms extends seditModules
 					rows="5"
 					>'.get_option($option['name']).'</textarea>
 				<i class="fas fa-copy copy"  data-clipboard-action="copy" data-clipboard-target="#copy-'.$option['name'].'"></i>
-				<p class="description">'.$option['description'].'</p>
+				<em>'.$option['description'].'</em>
+
 				<l class="front-code-php">
 					<label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo get_option(\''.$option['name'].'\'); ?>').'</label>
 				</l>
-			</td>
-		</tr>
+
+			</li>
+		</ul>
 		';
 		return $atom;
 	}
@@ -67,12 +70,18 @@ class seditAtoms extends seditModules
 		save_option($option['name'], $postID);
 		$atom = null;
 		$atom = '
-		<tr>
-			<th scope="row"><label for="option">'.$title.'</label></th>
-			<td>
-				wp_editor pracuje nad tym...
-			</td>
-		</tr>
+		<ul>
+			<li>
+				<label>'.$title.'</label>
+				<em>'.$option['description'].'</em>
+
+				<i class="fas fa-copy copy"  data-clipboard-action="copy" data-clipboard-target="#copy-'.$option['name'].'"></i>
+				<l class="front-code-php">
+					<label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo get_option(\''.$option['name'].'\'); ?>').'</label>
+				</l>
+
+			</li>
+		</ul>
 		';
 		return $atom;
 	}
@@ -84,29 +93,35 @@ class seditAtoms extends seditModules
 		}
 		$random = rand(0, 10000);
 		$atom = '
-		<tr>
-			<th scope="row"><label for="option">'.$title.'</label></th>
-			<td class="term-group-'.$random .'">
+		<ul>
+			<li class="term-group-'.$random .'">
+				<label>'.$title.'</label>
+
 				<input
 					name="'.$option['name'].'"
 					id="'.$option['name'].'"
 					value="'.get_multi_info($postID, $option['name'], "value", null, $random).'"
 					class="regular-text"
 					type="hidden">
-				<button
-					type="button"
-					data-id="'.$random .'"
-					class="button addSingleMedia"
-					data-media-uploader-target="#'.$option['name'].'"
-					><i class="fas fa-images"></i> Wybierz z biblioteki</button>
+
+					<button
+						type="button"
+						data-id="'.$random .'"
+						class="button addSingleMedia"
+						data-media-uploader-target="#'.$option['name'].'"
+						><i class="fas fa-images"></i> Wybierz z biblioteki</button>
+
 					<i class="fas fa-copy copy"  data-clipboard-action="copy" data-clipboard-target="#copy-'.$option['name'].'"></i>
-				<p class="description" style="margin:0 0 5px 0;">'.$option['description'].'</p>
-				<l class="front-code-php">
-					<label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo get_multi_info(null, \''.$option['name'].'\', \'image\', \'thumb350\', null); ?>').'</label>
-				</l>
-				'.get_multi_info($postID, $option['name'], 'image', $size, $random).'
-			</td>
-		</tr>
+			  	<em>'.$option['description'].'</em>
+
+					<l class="front-code-php">
+						<label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo get_multi_info(null, \''.$option['name'].'\', \'image\', \'thumb350\', null); ?>').'</label>
+					</l>
+
+					<span>'.get_multi_info($postID, $option['name'], 'image', $size, $random).'</span>
+
+			</li>
+		</ul>
 		';
 		return $atom;
 	}
@@ -259,29 +274,30 @@ class seditAtoms extends seditModules
 		}
 
 		function switch_atoms($dataSwitch, $get_page){
+			$first = $_GET['tab'];// OR empty($first)
 				foreach ($dataSwitch as $pageTab => $pageArray) {
 				//opisy dla sekcji
 				if (string_for_save($pageTab) === string_for_save($get_page)) {
+					$first = true;
 					$head = null;
 					$text = null;
 					// atomy
 					$head .= '
-					<tr>
-						<th scope="row"></th>
-						<td>
-							<h2>'.$pageArray['title'].$page.'</h2>
+					<ul>
+				 		<li>
+							<h3>'.$pageArray['title'].$page.'</h3>
 							<p>'.$pageArray['description'].'</p>
-						</td>
-					</tr>
+						</li>
+				 	</ul>
 					';
 					//akcja funkcji przed wszystkimi atomami
 					if (!empty($pageArray['function_before'])) {
 						$text .= '
-						<tr>
-							<td>';
-							$text .= call_user_func($pageArray['function_before']);
-						$text .= '</td>
-						</tr>
+						<ul>
+							<li>
+								<p>'.call_user_func($pageArray['function_before']).'</p>
+							</li>
+						</ul>
 						';
 					}
 				if (is_array($pageArray['atoms'])) {
@@ -289,11 +305,11 @@ class seditAtoms extends seditModules
 							//akcja funkcji przed atomem
 							if (!empty($option['function_before'])) {
 								$text .= '
-								<tr>
-									<td>';
-									$text .= call_user_func($option['function_before']);
-								$text .= '</td>
-								</tr>
+								<ul>
+									<li>
+										<p>'.call_user_func($pageArray['function_before']).'</p>
+									</li>
+								</ul>
 								';
 							}
 							// atom
@@ -327,44 +343,44 @@ class seditAtoms extends seditModules
 								break;
 							}
 							//akcja funkcji po atome
-							if (!empty($option['function_before'])) {
+							if (!empty($option['function_after'])) {
 								$text .= '
-								<tr>
-									<td>';
-									$text .= call_user_func($option['function_before']);
-								$text .= '</td>
-								</tr>
+								<ul>
+									<li>
+										<p>'.call_user_func($pageArray['function_after']).'</p>
+									</li>
+								</ul>
 								';
 							}
 						}
 						//akcja po wszystkich atomach
 						if (!empty($pageArray['function_after'])) {
 							$text .= '
-							<tr>
-								<td>';
-								$text .= call_user_func($pageArray['function_after']);
-							$text .= '</td>
-							</tr>
+							<ul>
+								<li>
+									<p>'.call_user_func($pageArray['function_after']).'</p>
+								</li>
+							</ul>
 							';
 						}
 
 						$text .= '
-						<tr>
-							<td>
-								<input name="submit" id="submit" class="button button-primary" value="Zapisz zmiany" type="submit">
-							</td>
-						</tr>
+						<ul>
+							<li>
+								<button	type="submit" class="button"><i class="fas fa-save"></i> Zapisz zmiany</button>
+							</li>
+						</ul>
 						';
 
 					}else{
 						//akcja funkcji gdy brak atomow
 						if (!empty($pageArray['atoms'])) {
 							$text .= '
-							<tr>
-								<td>';
-								$text .= call_user_func($pageArray['atoms']);
-							$text .= '</td>
-							</tr>
+							<ul>
+								<li>
+									<p>'.call_user_func($pageArray['atoms']).'</p>
+								</li>
+							</ul>
 							';
 						}
 					}

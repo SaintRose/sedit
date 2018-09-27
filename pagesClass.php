@@ -32,24 +32,16 @@ class seditPages extends seditAtoms
   }
 
   function pageTabs(){
-
-
-
-      if (1==1) {
         ?>
-        <div class="wrap">
-          <h2></h2>
-    			<form method="post" action="">
-    				<table class="form-table">
-    					<tbody>
-    					<?php
-    						echo seditAtoms::switch_atoms($this->pages , $_GET['page']);
-    					 ?>
-    				</tbody>
-    			</table>
-    		</form>
+        <div class="wrap seditwrap">
+					<form method="post" action="">
+	    			<div class="seditform">
+	    					<?php
+	    						echo seditAtoms::switch_atoms($this->pages , $_GET['page']);
+	    					 ?>
+	    			</div>
+    			</form>
     	 </div>
       <?php
-      }
   }
 }
