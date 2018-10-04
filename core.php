@@ -51,7 +51,7 @@ add_theme_support( 'post-thumbnails' );
 
 //////////////Zapisanie ustawień///////////////
 function save_option($name, $type){
-	if ( isset( $_POST['submit'] ) && $_POST['submit'] != '' ) {
+	if ( isset( $_POST[$name] ) && $_POST[$name] != '' ) {
 			if (is_array($_POST[$name])) {
 				foreach ($_POST[$name] as $img_key => $img_value) {
 					$idimg .= $img_value.',';
@@ -59,9 +59,7 @@ function save_option($name, $type){
 				//update_post_meta( $type, $name, $idimg);
 				$_POST[$name] = $idimg;
 		}
-			update_option( $name, $_POST[$name] );
-
-
+		update_option( $name, $_POST[$name] );
 	} // do poprawi sapis dla meta post
 }
 //////////////Pobranie multi info///////////////

@@ -19,19 +19,20 @@ class seditAtoms extends seditModules
 		$atom = '
 		<ul>
 			<li>
-				<label>'.$title.'</label>
+				<label>
+					'.$title.'
+					<i class="fas fa-copy copy"  data-clipboard-action="copy" data-clipboard-target="#copy-'.$option['name'].'"></i>
+				</label>
 				<input
 					name="'.$option['name'].'"
 					id="'.$option['name'].'"
 					value="'.get_option($option['name']).'"
 					placeholder="'.$option['placeholder'].'"
 					type="text">
-				<i class="fas fa-copy copy"  data-clipboard-action="copy" data-clipboard-target="#copy-'.$option['name'].'"></i>
-				<em>'.$option['description'].'</em>
 
-				<l class="front-code-php">
-					<label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo get_option(\''.$option['name'].'\'); ?>').'</label>
-				</l>
+				'.((!empty($option['description'])) ? '<em>'.$option['description'].'</em>' : '').'
+
+				<l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo get_option(\''.$option['name'].'\'); ?>').'</label></l>
 
 			</li>
 		</ul>
@@ -45,7 +46,10 @@ class seditAtoms extends seditModules
 		$atom = '
 		<ul>
 			<li>
-				<label>'.$title.'</label>
+				<label>
+				  '.$title.'
+				  <i class="fas fa-copy copy"  data-clipboard-action="copy" data-clipboard-target="#copy-'.$option['name'].'"></i>
+				</label>
 				<textarea
 					name="'.$option['name'].'"
 					id="'.$option['name'].'"
@@ -53,8 +57,8 @@ class seditAtoms extends seditModules
 					class="regular-text"
 					rows="5"
 					>'.get_option($option['name']).'</textarea>
-				<i class="fas fa-copy copy"  data-clipboard-action="copy" data-clipboard-target="#copy-'.$option['name'].'"></i>
-				<em>'.$option['description'].'</em>
+
+				'.((!empty($option['description'])) ? '<em>'.$option['description'].'</em>' : '').'
 
 				<l class="front-code-php">
 					<label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo get_option(\''.$option['name'].'\'); ?>').'</label>
@@ -72,10 +76,13 @@ class seditAtoms extends seditModules
 		$atom = '
 		<ul>
 			<li>
-				<label>'.$title.'</label>
-				<em>'.$option['description'].'</em>
+				<label>
+				  '.$title.'
+				  <i class="fas fa-copy copy"  data-clipboard-action="copy" data-clipboard-target="#copy-'.$option['name'].'"></i>
+				</label>
 
-				<i class="fas fa-copy copy"  data-clipboard-action="copy" data-clipboard-target="#copy-'.$option['name'].'"></i>
+				'.((!empty($option['description'])) ? '<em>'.$option['description'].'</em>' : '').'
+
 				<l class="front-code-php">
 					<label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo get_option(\''.$option['name'].'\'); ?>').'</label>
 				</l>
@@ -95,7 +102,10 @@ class seditAtoms extends seditModules
 		$atom = '
 		<ul>
 			<li class="term-group-'.$random .'">
-				<label>'.$title.'</label>
+				<label>
+				  '.$title.'
+				  <i class="fas fa-copy copy"  data-clipboard-action="copy" data-clipboard-target="#copy-'.$option['name'].'"></i>
+				</label>
 
 				<input
 					name="'.$option['name'].'"
@@ -111,8 +121,7 @@ class seditAtoms extends seditModules
 						data-media-uploader-target="#'.$option['name'].'"
 						><i class="fas fa-images"></i> Wybierz z biblioteki</button>
 
-					<i class="fas fa-copy copy"  data-clipboard-action="copy" data-clipboard-target="#copy-'.$option['name'].'"></i>
-			  	<em>'.$option['description'].'</em>
+					'.((!empty($option['description'])) ? ''.((!empty($option['description'])) ? '<em>'.$option['description'].'</em>' : '').'' : '').'
 
 					<l class="front-code-php">
 						<label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo get_multi_info(null, \''.$option['name'].'\', \'image\', \'thumb350\', null); ?>').'</label>

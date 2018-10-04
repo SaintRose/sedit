@@ -15,7 +15,7 @@
 .fa-copy {
   cursor: pointer;
   color: #ccc;
-  padding: 5px;
+  padding: 0 0 0 5px;
   top: 0;
   display: none;
 }
@@ -156,7 +156,12 @@ body {
   max-width: 700px;
 }
 .seditform ul li l {
-  display: none;
+  height: 0;
+}
+.seditform ul li l label {
+  font-size: 0;
+  margin: 0;
+  height: 0;
 }
 .seditform ul li span {
   border: 1px dashed #C7C7C7;
