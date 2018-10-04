@@ -286,7 +286,7 @@ class seditAtoms extends seditModules
 			$first = $_GET['tab'];// OR empty($first)
 				foreach ($dataSwitch as $pageTab => $pageArray) {
 				//opisy dla sekcji
-				if (string_for_save($pageTab) === string_for_save($get_page)) {
+				if (string_for_save($pageTab) === string_for_save($get_page)  OR $first === null) {
 					$first = true;
 					$head = null;
 					$text = null;
@@ -376,7 +376,7 @@ class seditAtoms extends seditModules
 						$text .= '
 						<ul>
 							<li>
-								<button	type="submit" class="button"><i class="fas fa-save"></i> Zapisz zmiany</button>
+								<button	type="submit" name="submit" value="1" class="button"><i class="fas fa-save"></i> Zapisz zmiany</button>
 							</li>
 						</ul>
 						';

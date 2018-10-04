@@ -51,7 +51,7 @@ add_theme_support( 'post-thumbnails' );
 
 //////////////Zapisanie ustawień///////////////
 function save_option($name, $type){
-	if ( isset( $_POST[$name] ) && $_POST[$name] != '' ) {
+	if ( isset( $_POST['submit'] ) && $_POST['submit'] != '' ) {
 			if (is_array($_POST[$name])) {
 				foreach ($_POST[$name] as $img_key => $img_value) {
 					$idimg .= $img_value.',';
@@ -72,7 +72,7 @@ function get_multi_info($post_type_id, $name, $type, $size, $id){
   if (!empty($post_type_id)) {
     $up_img = get_post_meta( $post_type_id, $name, true );
   }else {
-      $up_img = get_option($name);
+    $up_img = get_option($name);
   }
 	switch ($type) {
 		case 'value':
