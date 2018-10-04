@@ -1,51 +1,85 @@
 <?php
+use Dompdf\Dompdf;
 include 'sedit/core.php';
 
-$sedit = new seditSlider();
-$sedit->addSlider();
 
 register_nav_menus( array(
 	'top'    => 'Menu główne'
 ) );
 
+$sTabs->pageTabsData([
 
-//do skasowania
 
 
-function login_pdf( $atts, $content ) {
-    extract( shortcode_atts( array(
-        'nazwa' => '',
-        'link' => '',
-    ), $atts ) );
+	'Najnowsza' => [
+		'title' => 'jakiś tytuł',
+		'description' => 'Główny opis dla sekcji',
+		'atoms' => [
+			'Google' => [
+				'name' => 'googlecddss',
+				'type' => 'module:google',
+				'placeholder' => 'Imię i nazwisko',
+				'description' => 'Proszę uzupełnić dane'
+				]
+			]
+	]
 
-		if (is_user_logged_in()) {
-			$link = '<a href="'.$atts['link'].'">'.$atts['nazwa'].'</a>';
-		}else{
-			$link = $atts['nazwa'].' (<a href="'.wp_login_url().'">Zaloguj się, aby zobaczyć </a>)';
-		}
+]);
 
-    return $link;
+$sPages->pageData([
+
+	'BARCODE' => [
+		'title' => 'Główny tytuł dla tel podstrony',
+		'dashicons' => 'dashicons-chart-pie',
+		'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea eius voluptatum, iusto laboriosam, commodi quas hic aperiam reiciendis a iste obcaecati cumque dolorum, accusantium enim atque quasi accusamus corporis debitis.',
+		'function_after' => 'barcode_generator',
+		'atoms' => [
+			'Nazwa firmy' => [
+				'name' => 'name',
+				'type' => 'input',
+				'placeholder' => 'Nazwa firmy',
+				'description' => 'Wpisz pełną nazwę firmy',
+			],
+			'Kod kreskowy' => [
+				'name' => 'barcode',
+				'type' => 'input',
+				'placeholder' => 'Kod kreskowy',
+				'description' => 'Kod kreskowy do wygenerowania na naklejce',
+			]
+			]
+	],
+
+]);
+
+function barcode_generator(){
+	if (!empty(get_option('name')) AND !empty(get_option('barcode')) AND !empty(get_option('logo'))) {
+
+
+		require_once 'sedit/modules/barcode/BarcodeGenerator.php';
+		require_once 'sedit/modules/barcode/BarcodeGeneratorPNG.php';
+		//require_once 'sedit/modules/dompdf/Dompdf.php';
+		$generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
+
+		$code .= '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode(get_option('barcode'), $generator::TYPE_EAN_13)) . '">';
+
+		$text .= '
+		<div class="barcode">
+			<ul><h1>'.get_option('name').'</h1></ul>
+			<ul><p>'.$code.'</p></ul>
+			<ul><p>'.get_option('barcode').'</p></ul>
+		</div>
+		';
+		return $text;
+
+	}else{
+		return 'Uzupełnij wszystkie dane aby wygenerować BARCODE';
+	}
 }
-add_shortcode( 'PDF', 'login_pdf' );
 
-// add new buttons
-add_filter( 'mce_buttons', 'myplugin_register_buttons' );
-function myplugin_register_buttons( $buttons ) {
-   array_push( $buttons, 'separator', 'myplugin' );
-   return $buttons;
+
+function przed(){
+	return 'wynik: działa przed!';
 }
-add_action('init', 'wpse72394_shortcode_button_init');
-function wpse72394_shortcode_button_init() {
-		 if ( ! current_user_can('edit_posts') && ! current_user_can('edit_pages') && get_user_option('rich_editing') == 'true')
-					return;
-		 add_filter("mce_external_plugins", "wpse72394_register_tinymce_plugin");
-		 add_filter('mce_buttons', 'wpse72394_add_tinymce_button');
-}
-function wpse72394_register_tinymce_plugin($plugin_array) {
-	 $plugin_array['wpse72394_button'] = 'path/to/shortcode.js';
-	 return $plugin_array;
-}
-function wpse72394_add_tinymce_button($buttons) {
-	 $buttons[] = "wpse72394_button";
-	 return $buttons;
+function po(){
+	return 'wynik: działa po!';
 }
