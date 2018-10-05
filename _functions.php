@@ -41,7 +41,7 @@ $sPages->pageData([
 				'description' => 'Wpisz pełną nazwę firmy',
 			],
 			'Kod kreskowy' => [
-				'name' => 'barcode',
+				'name' => 'barcodee',
 				'type' => 'input',
 				'placeholder' => 'Kod kreskowy',
 				'description' => 'Kod kreskowy do wygenerowania na naklejce',
@@ -52,7 +52,7 @@ $sPages->pageData([
 ]);
 
 function barcode_generator(){
-	if (!empty(get_option('name')) AND !empty(get_option('barcode')) AND !empty(get_option('logo'))) {
+	if (!empty(get_option('name')) AND !empty(get_option('barcodee')) AND !empty(get_option('logo'))) {
 
 
 		require_once 'sedit/modules/barcode/BarcodeGenerator.php';
@@ -60,13 +60,13 @@ function barcode_generator(){
 		//require_once 'sedit/modules/dompdf/Dompdf.php';
 		$generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
 
-		$code .= '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode(get_option('barcode'), $generator::TYPE_EAN_13)) . '">';
+		$code .= '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode(get_option('barcodee'), $generator::TYPE_EAN_13)) . '">';
 
 		$text .= '
 		<div class="barcode">
 			<ul><h1>'.get_option('name').'</h1></ul>
 			<ul><p>'.$code.'</p></ul>
-			<ul><p>'.get_option('barcode').'</p></ul>
+			<ul><p>'.get_option('barcodee').'</p></ul>
 		</div>
 		';
 		return $text;
