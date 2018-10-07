@@ -212,3 +212,10 @@ add_action( 'admin_bar_menu', 'remove_wp_logo', 999 );
 function remove_wp_logo( $wp_admin_bar ) {
 	$wp_admin_bar->remove_node( 'wp-logo' );
 }
+/////////////////////////////LINKOWANIE/////////////////////////////////
+function asset($name){
+	echo get_stylesheet_directory_uri().'/assets/images/'.$name;
+}
+function assetImg($name){
+	echo '<img src="'.get_stylesheet_directory_uri().'/assets/images/'.$name.'" >';
+}
