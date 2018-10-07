@@ -19,7 +19,7 @@ class BarcodeGeneratorJPG extends BarcodeGenerator
      * @public
      * @throws BarcodeException
      */
-    public function getBarcode($code, $type, $widthFactor = 2, $totalHeight = 30, $color = array(0, 0, 0))
+    public function getBarcode($code, $type, $widthFactor = 5, $totalHeight = 100, $color = array(0, 0, 0))
     {
         $barcodeData = $this->getBarcodeData($code, $type);
 

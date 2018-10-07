@@ -24,6 +24,7 @@ function load_custom_wp_admin_style() {
  	wp_enqueue_script( 'clipboard.min', get_template_directory_uri() . '/sedit/assets/js/clipboard.min.js', false, '1.0.0' );
  	wp_enqueue_script( 'code', get_template_directory_uri() . '/sedit/assets/js/code.js', false, '1.0.0' );
 	wp_enqueue_style( 'style-admin', get_template_directory_uri() . '/sedit/assets/css/style-admin.css', false, '' );
+	wp_enqueue_style( 'print', get_template_directory_uri() . '/sedit/assets/css/print.css', false, '' );
 }
 
 
