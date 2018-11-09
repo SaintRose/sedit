@@ -32,7 +32,7 @@ class seditAtoms extends seditModules
 
 				'.((!empty($option['description'])) ? '<em>'.$option['description'].'</em>' : '').'
 
-				<l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit(\'\', \''.$option['name'].'\', \'option\', null, null); ?>').'</label></l>
+				<l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit(null, \''.$option['name'].'\', \'option\', null, null); ?>').'</label></l>
 
 			</li>
 		</ul>
@@ -60,7 +60,7 @@ class seditAtoms extends seditModules
 
 				'.((!empty($option['description'])) ? '<em>'.$option['description'].'</em>' : '').'
 
-				<l class="front-code-php"><l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit(\'\', \''.$option['name'].'\', \'option\', null, null); ?>').'</label></l></l>
+				<l class="front-code-php"><l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit(null, \''.$option['name'].'\', \'option\', null, null); ?>').'</label></l></l>
 
 			</li>
 		</ul>
@@ -82,7 +82,7 @@ class seditAtoms extends seditModules
 				'.((!empty($option['description'])) ? '<em>'.$option['description'].'</em>' : '').'
 
 				<l class="front-code-php">
-						<l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit(\'\', \''.$option['name'].'\', \'option\', null, null); ?>').'</label></l>
+						<l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit(null, \''.$option['name'].'\', \'option\', null, null); ?>').'</label></l>
 				</l>
 
 			</li>
@@ -139,46 +139,60 @@ class seditAtoms extends seditModules
 
 			$random = rand(0, 10000);
 			$atom = '
-			<tr>
-				<th scope="row"><label for="option">'.$title.'</label></th>
-				<td class="term-group-'.$random .'">
-					<input
-						name="'.$option['name'].'"
-						id="'.$option['name'].'"
-						value="'.sedit($postID, $option['name'], "value", null, null).'"
-						class="regular-text"
-						type="hidden">
-					<button
-						type="button"
-						data-id="'.$random .'"
-						class="button addMultiMedia"
-						data-media-uploader-target="#'.$option['name'].'"
-						data-name-field="'.$option['name'].'"
-						><i class="fas fa-images"></i> Wybierz z biblioteki</button>
-						<i class="fas fa-copy copy"  data-clipboard-action="copy" data-clipboard-target="#copy-'.$option['name'].'"></i>
-					<p class="description" style="margin:0 0 5px 0;">'.$option['description'].'</p>
-					<l class="front-code-php">
-						<label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit(null, \''.$option['name'].'\', \'images\', \'thumb350\', null); ?>').'</label>
-					</l>
-					<div class="sort-images">';
-          $get_id_image = explode(",", sedit($postID, $option['name'], "value", null, null));
-          foreach ($get_id_image as $key => $value) {
-            $image_attributes = wp_get_attachment_image_src($value, 'thumb100');
-						$rand = rand(0, 10000);
-            if ($image_attributes) {
-              $atom .= '
-							<div class="image-'.$rand.' image-theme">
-								<input name="'.$option['name'].'[]" class="'.$rand.'-trash" value="'.$value.'" type="hidden">
-								<img src="'.$image_attributes[0].'">
-								<div data-id="'.$rand.'" data-crash=".'.$rand.'-trash" class="image-remove"><i class="fas fa-trash"></i></div>
-							</div>';
-            }
-          }
+			<ul>
+				<li class="term-group-'.$random .'">
+					<label>
+					  '.$title.'
+					  <i class="fas fa-copy copy"  data-clipboard-action="copy" data-clipboard-target="#copy-'.$option['name'].'"></i>
+					</label>
 
-				$atom .= '
-				</div>
-				</td>
-			</tr>
+						<input
+							name="'.$option['name'].'"
+							id="'.$option['name'].'"
+							value="'.sedit($postID, $option['name'], "value", null, null).'"
+							class="regular-text"
+							type="hidden">
+
+							<button
+								type="button"
+								data-id="'.$random .'"
+								class="button addMultiMedia"
+								data-media-uploader-target="#'.$option['name'].'"
+								data-name-field="'.$option['name'].'"
+								><i class="fas fa-images"></i> Wybierz z biblioteki</button>
+
+							<div
+								class="button delete-all-image"
+								data-crash="'.$random .'
+								input-name="'.$option['name'].'"><i class="fas fa-trash-alt"></i></div>
+
+
+						'.((!empty($option['description'])) ? ''.((!empty($option['description'])) ? '<em>'.$option['description'].'</em>' : '').'' : '').'
+
+						<l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit(null, \''.$option['name'].'\', \'images\', \'thumb350\', null); ?>').'</label></l>
+
+						<span class="crash-all-image-'.$random .'">
+						<div class="sort-images">';
+	          $get_id_image = explode(",", sedit($postID, $option['name'], "value", null, null));
+	          foreach ($get_id_image as $key => $value) {
+	            $image_attributes = wp_get_attachment_image_src($value, 'thumb100');
+							$rand = rand(0, 10000);
+	            if ($image_attributes) {
+	              $atom .= '
+								<div class="image-'.$rand.' image-theme">
+									<input name="'.$option['name'].'[]" class="'.$rand.'-trash" value="'.$value.'" type="hidden">
+									<img src="'.$image_attributes[0].'">
+									<div data-id="'.$rand.'" data-crash=".'.$rand.'-trash" class="image-remove"><i class="fas fa-trash"></i></div>
+								</div>';
+	            }
+	          }
+
+					$atom .= '
+					</div>
+					</span>
+
+				</li>
+			</ul>
 			';
 			return $atom;
 		}

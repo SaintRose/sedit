@@ -97,4 +97,12 @@ jQuery(document).ready(function($) {
 
   });
 
+  $('.delete-all-image').click(function() {
+    var crashID = $(this).attr('data-crash');
+    //var crashInput = $(this).attr(''.$option['name'].'');
+    $('.crash-all-image-' + crashID).css('display', 'none');
+    $(crashInput).val('');
+    alert(crashInput);
+  });
+
 });
