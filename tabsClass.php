@@ -33,14 +33,14 @@ class seditTabs extends seditAtoms
 		?>
 		<div class="wrap">
       <div id="icon-themes" class="icon32"></div>
-      <h2><span style="margin:6px 10px 0 0;" class="dashicons dashicons-welcome-widgets-menus"></span><?php bloginfo('title'); ?> - opcje dodatkowe</h2>
+      <h2><span style="margin:6px 10px 0 0;" class="dashicons dashicons-welcome-widgets-menus"></span><?php bloginfo('title'); ?> - ustawienia</h2>
 			<?php //settings_errors(); ?>
 			<div class="nav-tab-wrapper nav-tab-sedit">
 				<?php
 					$first = $_GET['tab'];
 					foreach ($this->tabs as $pageTab => $pageArray) {
 						$name = string_for_save($pageTab);
-						echo '<a href="?page=ustawienia&tab='.$name.'" class="nav-tab '.(($active_tab === $name OR $first === null) ? 'nav-tab-active' : '').'">'.$pageTab.'</a>';
+						echo '<a href="?page=ustawienia&tab='.$name.'" class="nav-tab '.(($active_tab === $name OR $first === null) ? 'nav-tab-active' : '').'">'.$pageArray['page'].'</a>';
 						$first = true;
 					}
 				 ?>

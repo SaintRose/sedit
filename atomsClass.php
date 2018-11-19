@@ -13,14 +13,14 @@ class seditAtoms extends seditModules
 		// code
 	}
 // INPUT
-	public function atomInput($postID, $title, $option){
+	public function atomInput($postID, $option){
 		save_option($option['name'], $postID);
 		$atom = null;
 		$atom = '
 		<ul>
 			<li>
 				<label>
-					'.$title.'
+					'.$option['title'].'
 					<i class="fas fa-copy copy"  data-clipboard-action="copy" data-clipboard-target="#copy-'.$option['name'].'"></i>
 				</label>
 				<input
@@ -40,14 +40,14 @@ class seditAtoms extends seditModules
 		return $atom;
 	}
 // TEXTAREA
-	function atomTextarea($postID, $title, $option){
+	function atomTextarea($postID, $option){
 		save_option($option['name'], $postID);
 		$atom = null;
 		$atom = '
 		<ul>
 			<li>
 				<label>
-				  '.$title.'
+				  '.$option['title'].'
 				  <i class="fas fa-copy copy"  data-clipboard-action="copy" data-clipboard-target="#copy-'.$option['name'].'"></i>
 				</label>
 				<textarea
@@ -68,14 +68,14 @@ class seditAtoms extends seditModules
 		return $atom;
 	}
 // WPEDITOR
-	function atomWpeditor($postID, $title, $option){
+	function atomWpeditor($postID, $option){
 		save_option($option['name'], $postID);
 		$atom = null;
 		$atom = '
 		<ul>
 			<li>
 				<label>
-				  '.$title.'
+				  '.$option['title'].'
 				  <i class="fas fa-copy copy"  data-clipboard-action="copy" data-clipboard-target="#copy-'.$option['name'].'"></i>
 				</label>
 
@@ -91,7 +91,7 @@ class seditAtoms extends seditModules
 		return $atom;
 	}
 // IMAGE
-	function atomImage($postID, $title, $option){
+	function atomImage($postID, $option){
 		save_option($option['name'], $postID);
 		if ($option['size'] === 'marker') {
 			$size = 'marker';
@@ -101,7 +101,7 @@ class seditAtoms extends seditModules
 		<ul>
 			<li class="term-group-'.$random .'">
 				<label>
-				  '.$title.'
+				  '.$option['title'].'
 				  <i class="fas fa-copy copy"  data-clipboard-action="copy" data-clipboard-target="#copy-'.$option['name'].'"></i>
 				</label>
 
@@ -131,7 +131,7 @@ class seditAtoms extends seditModules
 		return $atom;
 	}
 	// IMAGES
-		function atomImages($postID, $title, $option){
+		function atomImages($postID, $option){
 			save_option($option['name'], $postID);
 			if ($option['size'] === 'marker') {
 				$size = 'marker';
@@ -142,7 +142,7 @@ class seditAtoms extends seditModules
 			<ul>
 				<li class="term-group-'.$random .'">
 					<label>
-					  '.$title.'
+					  '.$option['title'].'
 					  <i class="fas fa-copy copy"  data-clipboard-action="copy" data-clipboard-target="#copy-'.$option['name'].'"></i>
 					</label>
 
@@ -150,7 +150,7 @@ class seditAtoms extends seditModules
 							name="'.$option['name'].'"
 							id="'.$option['name'].'"
 							value="'.sedit($postID, $option['name'], "value", null, null).'"
-							class="regular-text"
+							class="regular-text input-name-'.$random .'"
 							type="hidden">
 
 							<button
@@ -163,7 +163,7 @@ class seditAtoms extends seditModules
 
 							<div
 								class="button delete-all-image"
-								data-crash="'.$random .'
+								data-crash="'.$random .'"
 								input-name="'.$option['name'].'"><i class="fas fa-trash-alt"></i></div>
 
 
@@ -171,21 +171,26 @@ class seditAtoms extends seditModules
 
 						<l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit(null, \''.$option['name'].'\', \'images\', \'thumb350\', null); ?>').'</label></l>
 
-						<span class="crash-all-image-'.$random .'">
-						<div class="sort-images">';
-	          $get_id_image = explode(",", sedit($postID, $option['name'], "value", null, null));
-	          foreach ($get_id_image as $key => $value) {
-	            $image_attributes = wp_get_attachment_image_src($value, 'thumb100');
-							$rand = rand(0, 10000);
-	            if ($image_attributes) {
-	              $atom .= '
-								<div class="image-'.$rand.' image-theme">
-									<input name="'.$option['name'].'[]" class="'.$rand.'-trash" value="'.$value.'" type="hidden">
-									<img src="'.$image_attributes[0].'">
-									<div data-id="'.$rand.'" data-crash=".'.$rand.'-trash" class="image-remove"><i class="fas fa-trash"></i></div>
-								</div>';
-	            }
-	          }
+						<span class="">
+						<div class="sort-images sort-images-'.$random .' crash-all-image-'.$random .'">';
+						$data = sedit($postID, $option['name'], "value", null, null);
+	          if ($data) {
+	          	$get_id_image = explode(",", $data );
+							foreach ($get_id_image as $key => $value) {
+		            $image_attributes = wp_get_attachment_image_src($value, 'thumb100');
+								$rand = rand(0, 10000);
+		            if ($image_attributes) {
+		              $atom .= '
+									<div class="image-'.$rand.' image-theme">
+										<input name="'.$option['name'].'[]" class="'.$rand.'-trash" value="'.$value.'" type="hidden">
+										<img src="'.$image_attributes[0].'">
+										<div data-id="'.$rand.'" data-crash=".'.$rand.'-trash" class="image-remove"><i class="fas fa-trash"></i></div>
+									</div>';
+		            }
+		          }
+	          }else{
+							$atom .=  '<img src="'.get_stylesheet_directory_uri() . '/sedit/images/noimage.png">';
+						}
 
 					$atom .= '
 					</div>
@@ -197,7 +202,7 @@ class seditAtoms extends seditModules
 			return $atom;
 		}
 	// FILE
-		function atomFile($postID, $title, $option){
+		function atomFile($postID, $option){
 			save_option($option['name'], $postID);
 			if ($option['size'] === 'marker') {
 				$size = 'marker';
@@ -205,7 +210,7 @@ class seditAtoms extends seditModules
 			$random = rand(0, 10000);
 			$atom = '
 			<tr>
-				<th scope="row"><label for="option">'.$title.'</label></th>
+				<th scope="row"><label for="option">'.$option['title'].'</label></th>
 				<td class="term-group-'.$random .'">
 					<input
 						name="'.$option['name'].'"
@@ -231,11 +236,11 @@ class seditAtoms extends seditModules
 			return $atom;
 		}
 // TITLE
-	function atomTitle($title, $option){
+	function atomTitle($option){
 		$atom = '
 		<ul>
 			<li>
-				<h3>'.$option['title'].'</h3>
+				<h3><i style="color:#808080;" class="fas fa-file"></i> '.$option['title'].'</h3>
 				<p>'.$option['description'].'</p>
 			</li>
 		</ul>
@@ -244,10 +249,10 @@ class seditAtoms extends seditModules
 	}
 
 // ERROR
-	function atomError($title, $option){
+	function atomError($option){
 		$atom = '
 		<tr>
-			<th scope="row"><label for="option">'.$title.'</label></th>
+			<th scope="row"><label for="option">'.$option['title'].'</label></th>
 			<td>
 				<p><b>Błąd!</b> Nie ma takiego atomu lub modułu</p>
 				<p>Wartość <b>[type = > '.$option['type'].']</b> jest nieprawidłowa</p>
@@ -257,7 +262,7 @@ class seditAtoms extends seditModules
 		return $atom;
 	}
 	// LINK
-		function atomLink($postID, $title, $option){
+		function atomLink($postID, $option){
 		save_option($option['name'], $postID);
 		/*
 		$args = array(
@@ -276,7 +281,7 @@ class seditAtoms extends seditModules
 
 			$atom = '
 			<tr>
-				<th scope="row"><label for="option">'.$title.'</label></th>
+				<th scope="row"><label for="option">'.$option['title'].'</label></th>
 				<td>
 				<input
 					name="'.$option['name'].'"
@@ -303,7 +308,7 @@ class seditAtoms extends seditModules
 					$head .= '
 					<ul>
 				 		<li>
-							<h3>'.$pageArray['title'].$page.'</h3>
+							<h3><i style="color:#808080;" class="fas fa-file"></i> '.$pageArray['title'].$page.'</h3>
 							<p>'.$pageArray['description'].'</p>
 						</li>
 				 	</ul>
@@ -333,31 +338,31 @@ class seditAtoms extends seditModules
 							// atom
 							switch ($option['type']) {
 								case 'input':
-									$text .= $this->atomInput($post->ID, $title, $option);
+									$text .= $this->atomInput($post->ID, $option);
 									break;
 								case 'textarea':
-									$text .= $this->atomTextarea($post->ID, $title, $option);
+									$text .= $this->atomTextarea($post->ID, $option);
 									break;
 								case 'wpeditor':
-									$text .= $this->atomWpeditor($post->ID, $title, $option);
+									$text .= $this->atomWpeditor($post->ID, $option);
 									break;
 								case 'image':
-									$text .= $this->atomImage($post->ID, $title, $option);
+									$text .= $this->atomImage($post->ID, $option);
 									break;
 								case 'images':
-									$text .= $this->atomImages($post->ID, $title, $option);
+									$text .= $this->atomImages($post->ID, $option);
 									break;
 								case 'title':
-									$text .= $this->atomTitle($title, $option);
+									$text .= $this->atomTitle($option);
 									break;
 								case 'link':
-									$text .= $this->atomLink($post->ID, $title, $option);
+									$text .= $this->atomLink($post->ID, $option);
 									break;
 								case 'module:google':
 									$text .= seditModules::moduleGoogle();
 									break;
 								default:
-									$text .= $this->atomError($title, $option);
+									$text .= $this->atomError($option);
 								break;
 							}
 							//akcja funkcji po atome

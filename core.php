@@ -161,14 +161,15 @@ function get_image_option($type, $name, $size, $crop){
 }
 ///////////////////////////Generowanie stringu do zapisu////////////////////////
 function string_for_save($string){
-  //$string = strtr($string, 'ĘęÓóĄąŚśŁłŹźŻżĆćŃń', 'EeOoAaSsLlZzZzCcNn');
-  $string = strtr($string, 'ˇ¦¬±¶Ľ','ASZasz');
-  $string = preg_replace("'[[:punct:][:space:]]'",'-',$string);
-  $string = strtolower($string);
-  $znaki = '-';
-  $powtorzen = 1;
-  $string = preg_replace_callback('#(['.$znaki.'])\1{'.$powtorzen.',}#', create_function('$a', 'return substr($a[0], 0,'.$powtorzen.');'), $string);
-  return $string;
+	$string= strtolower($string);
+$string = str_replace(' ', '-', $string);
+$string = str_replace(array('ą', 'ć', 'ę', 'ł', 'ń', 'ó', 'ś', 'ź', 'ż'), array('a', 'c', 'e', 'l', 'n', 'o', 's', 'z', 'z'), $string);
+$string = preg_replace('/[^0-9a-z\-]+/', '', $string);
+$string = preg_replace('/[\-]+/', '-', $string);
+$string= trim($string,'-');
+
+
+$string = str_replace(array(',', ':', ';', ' '), array('', '', '', '-'), $string);return $string;
 }
 /////////////////////////////INNE//////////////////////////////////
 function new_dashboard_home($username, $user){

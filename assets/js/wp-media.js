@@ -50,9 +50,10 @@ jQuery(document).ready(function($) {
       var selection = custom_uploader.state().get('selection');
       selection.map(function(attachment) {
         attachment = attachment.toJSON();
+        //console.log(attachment);
         $('.hide-img-' + dataID).hide();
         //$(".term-group-" + dataID).append("<img src=" +attachment.url+">");
-        $(".term-group-" + dataID).append('<div class="image-theme image-theme-full"><input name="' + nameField + '[]" value="' + attachment.id + '" type="hidden"><img src="' + attachment.url + '"></div>');
+        $(".sort-images-" + dataID).append('<div class="image-theme ui-sortable-handle"><input name="' + nameField + '[]" value="' + attachment.id + '" type="hidden"><img src="' + attachment.sizes.thumbnail.url + '"></div>');
         var multi = $(field).val();
         $(field).val('');
         $(field).val(multi + attachment.id + ',');
@@ -62,7 +63,7 @@ jQuery(document).ready(function($) {
     custom_uploader.open();
   });
 
-  // Remove
+  // kasowanie pojedynczego zdj w atomie typu images
   $('.image-remove').click(function() {
     var crashID = $(this).attr('data-crash');
     var dataID = $(this).attr('data-id');
@@ -70,6 +71,13 @@ jQuery(document).ready(function($) {
     $('.' + dataID + '-trash').attr('name', 'null');
   });
   $('.sort-images').sortable();
+
+  //kasowanie wszystkich zdjec w atom tpe images
+  $('.delete-all-image').click(function() {
+    var crashID = $(this).attr('data-crash');
+    $('.input-name-' + crashID).val('');
+    $('.crash-all-image-' + crashID).html('');
+  });
 
 
   $('.addSingleMediaFile').click(function(e) {
@@ -97,12 +105,5 @@ jQuery(document).ready(function($) {
 
   });
 
-  $('.delete-all-image').click(function() {
-    var crashID = $(this).attr('data-crash');
-    //var crashInput = $(this).attr(''.$option['name'].'');
-    $('.crash-all-image-' + crashID).css('display', 'none');
-    $(crashInput).val('');
-    alert(crashInput);
-  });
 
 });

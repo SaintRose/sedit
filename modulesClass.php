@@ -72,37 +72,43 @@ class seditModules
 
 
 
-		$module .= seditAtoms::atomInput(null, 'Współrzędna X', [
+		$module .= seditAtoms::atomInput(null, [
+			'title' => 'Współrzędna X',
 			'name' => 'googlemapsx',
 			'placeholder' => '55.038423',
 			'description' => 'Położenie na osi x'
 		]);
 
-		$module .= seditAtoms::atomInput(null, 'Współrzędna Y', [
+		$module .= seditAtoms::atomInput(null, [
+			'title' => 'Współrzędna Y',
 			'name' => 'googlemapsy',
 			'placeholder' => '21.982128',
 			'description' => 'Położenie na osi y'
 		]);
 
-		$module .= seditAtoms::atomInput(null, 'API Key', [
+		$module .= seditAtoms::atomInput(null, [
+			'title' => 'API Key',
 			'name' => 'googlemapapi',
 			'placeholder' => 'AIzaSyC_xl2eHSi5uhXLqW9z8PZY3XDs68asYsM',
 			'description' => 'API uzyskanie po rejestracji w Google'
 		]);
 
-		$module .= seditAtoms::atomImage(null, 'Marker', [
+		$module .= seditAtoms::atomImage(null, [
+			'title' => 'Marker',
 			'name' => 'marker',
 			'size' => 'marker',
 			'description' => 'Zalecane rozmiary maximum 64x64'
 		]);
 
-		$module .= seditAtoms::atomInput(null, 'Widoczny obszar', [
+		$module .= seditAtoms::atomInput(null, [
+			'title' => 'Widoczny obszar',
 			'name' => 'sizemap',
 			'placeholder' => '1 - 20',
 			'description' => 'Wybierz poziom zblizenia 1 do 20'
 		]);
 
-		$module .= seditAtoms::atomInput(null, 'Odnośnik', [
+		$module .= seditAtoms::atomInput(null, [
+			'title' => 'Odnośnik',
 			'name' => 'linkmarker',
 			'placeholder' => 'https://www.google.com/maps/place/...',
 			'description' => 'Przejdz pod adres po kliknięciu w marker'
