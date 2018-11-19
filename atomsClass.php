@@ -201,45 +201,11 @@ class seditAtoms extends seditModules
 			';
 			return $atom;
 		}
-	// FILE
-		function atomFile($postID, $option){
-			save_option($option['name'], $postID);
-			if ($option['size'] === 'marker') {
-				$size = 'marker';
-			}
-			$random = rand(0, 10000);
-			$atom = '
-			<tr>
-				<th scope="row"><label for="option">'.$option['title'].'</label></th>
-				<td class="term-group-'.$random .'">
-					<input
-						name="'.$option['name'].'"
-						id="'.$option['name'].'"
-						value="'.sedit($postID, $option['name'], "value", null, $random).'"
-						class="regular-text"
-						type="hidden">
-					<button
-						type="button"
-						data-id="'.$random .'"
-						class="button addSingleMediaFile"
-						data-media-uploader-target="#'.$option['name'].'"
-						><i class="fas fa-images"></i> Wybierz z biblioteki</button>
-						<i class="fas fa-copy copy"  data-clipboard-action="copy" data-clipboard-target="#copy-'.$option['name'].'"></i>
-					<p class="description" style="margin:0 0 5px 0;">'.$option['description'].'</p>
-					<l class="front-code-php">
-						<label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit(null, \''.$option['name'].'\', \'file\', \'null\', null); ?>').'</label>
-					</l>
-					'.sedit($postID, $option['name'], 'file', null, null).'
-				</td>
-			</tr>
-			';
-			return $atom;
-		}
 // TITLE
 	function atomTitle($option){
 		$atom = '
 		<ul>
-			<li>
+			<li style="margin-top:50px;">
 				<h3><i style="color:#808080;" class="fas fa-file"></i> '.$option['title'].'</h3>
 				<p>'.$option['description'].'</p>
 			</li>
@@ -251,50 +217,14 @@ class seditAtoms extends seditModules
 // ERROR
 	function atomError($option){
 		$atom = '
-		<tr>
-			<th scope="row"><label for="option">'.$option['title'].'</label></th>
-			<td>
-				<p><b>Błąd!</b> Nie ma takiego atomu lub modułu</p>
-				<p>Wartość <b>[type = > '.$option['type'].']</b> jest nieprawidłowa</p>
-			</td>
-		</tr>
+		<ul>
+			<li>
+			<p><i class="fas fa-exclamation-triangle"></i> <b>Błąd!</b> Nie ma takiego atomu lub modułu <b>[type = > '.$option['type'].']</b></p>
+			</li>
+		</ul>
 		';
 		return $atom;
 	}
-	// LINK
-		function atomLink($postID, $option){
-		save_option($option['name'], $postID);
-		/*
-		$args = array(
-		'depth'                 => 0,
-		'child_of'              => 0,
-		'selected'              => $option['name'],
-		'echo'                  => 0,
-		'name'                  => $option['name'],
-		'id'                    => null,
-		'class'                 => null,
-		'show_option_none'      => null,
-		'show_option_no_change' => null,
-		'option_none_value'     => null);
-		'.wp_dropdown_pages($args).'
-		*/
-
-			$atom = '
-			<tr>
-				<th scope="row"><label for="option">'.$option['title'].'</label></th>
-				<td>
-				<input
-					name="'.$option['name'].'"
-					id="'.$option['name'].'"
-					value="'.get_option($option['name']).'"
-					class="regular-text"
-					type="text"
-					placeholder="'.$option['placeholder'].'">
-				</td>
-			</tr>
-			';
-			return $atom;
-		}
 
 		function switch_atoms($dataSwitch, $get_page){
 			$first = $_GET['tab'];// OR empty($first)

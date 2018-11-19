@@ -15,24 +15,29 @@ class seditPages extends seditAtoms
 	}
 
   function pageData($data){
-    $this->pages =  $data;
+    $this->pages = $data;
+
   }
 
   function pageInitMenu(){
-		if ($this->pages) {
-			foreach ($this->pages as $page => $data) {
-	      add_menu_page($page, $page, 'manage_options', string_for_save($page), array($this, 'pageTabs'), $data['dashicons'] ,0 );
-	      if (is_array($data['subpage'])) {
-	        foreach ($data['subpage'] as $submenu => $subdata) {
-	          add_submenu_page($page, $submenu, $submenu, 'manage_options', 'pageTabs' );
-	        }
 
-	      }
+		if ($this->pages) {
+			// echo '<pre>';
+			// print_r($this->pages);
+			// echo '</pre>';
+			foreach ($this->pages as $key => $data) {
+				add_menu_page($data['page'], $data['page'], 'manage_options', string_for_save($data['page']), array($this, 'pageTabs'), $data['dashicons'] ,0 );
+	      // foreach ($data as $keyp => $page) {
+				// 	//add_submenu_page($page, $submenu, $submenu, 'manage_options', 'pageTabs' );
+	      // }
 	    }
 		}
   }
 
-  function pageTabs(){
+  function pageTabs($data){
+		// echo '<pre>';
+		// print_r($this->pages);
+		// echo '</pre>';
         ?>
         <div class="wrap seditwrap">
 					<form method="post" action="">

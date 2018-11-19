@@ -17,6 +17,7 @@ $ git clone git@github.com:piotrseed/sedit.git
 1.  Ponyższy kod należy użyć w `functions.php`
 
 ```php
+<?php
 include 'sedit/core.php';
 
 register_nav_menus( array(
@@ -25,32 +26,45 @@ register_nav_menus( array(
 
 $sTabs->pageTabsData([
 
-	'Przykładowa' => [
+	 [
+		'page' => 'HOME',
 		'title' => 'jakiś tytuł',
 		'description' => 'główny opis dla sekcji',
 		'function_before' => 'przed',
 		'function_after' => 'po',
 		'atoms' => [
-			'Imię' => [
-				'name' => 'logo',
-				'type' => 'image',
+			  [
+				'title' => 'Imię',
+				'name' => 'logdo',
+				'type' => 'images',
 				'placeholder' => 'Imię i nazwisko',
 				'description' => 'Proszę uzupełnić dane',
-				],
-			'Zdjęcie' => [
+				'function_before' => 'przed',
+				'function_after' => 'po',
+				],[
+				'title' => 'Zdjęcie',
 				'name' => 'foto',
 				'type' => 'input',
+				'placeholder' => 'input',
 				'description' => 'Kliknij aby wybrać z biblioteki mediów.'
-				],
-			'Przykładowy opis' => [
-				'name' => 'opis',
-				'type' => 'images',
-				'description' => 'Uzupełnij to pole'
+				],[
+				'title' => 'Zdjęcie',
+				'name' => 'foto',
+				'type' => 'title',
+				'placeholder' => 'input',
+				'description' => 'Kliknij aby wybrać z biblioteki mediów.'
+				],[
+				'title' => 'Zdjęcie',
+				'name' => 'foto',
+				'type' => 'imagess',
+				'placeholder' => 'input',
+				'description' => 'Kliknij aby wybrać z biblioteki mediów.'
 				]
 			]
-	],
+	 ],
 
-	'Najnowsza' => [
+	 [
+		'page' => 'Google maps',
 		'title' => 'jakiś tytuł',
 		'description' => 'główny opis dla sekcji',
 		'atoms' => [
@@ -64,41 +78,26 @@ $sTabs->pageTabsData([
 	]
 
 ]);
-
+/// nie działa poprawnie rozne atomy dla roznych stron
 $sPages->pageData([
 
-	'Strona' => [
-		'title' => 'Przykładowa strona',
-		'description' => 'opis dla sekcji',
-		'dashicons' => 'dashicons-format-status',
-		'function_before' => 'przed',
-		'function_after' => 'po',
-		'atoms' => [
-			'Imię' => [
-				'name' => 'logoaaa',
-				'type' => 'input',
-				'placeholder' => 'Imię i nazwisko',
-				'description' => 'Proszę uzupełnić dane',
-				'function_before' => 'przed',
-				'function_after' => 'po',
-				]
-			]
-	],
-
-	'Najnowsza' => [
-		'title' => 'jakiś tytuł',
-		'description' => 'główny opis dla sekcji',
-		'dashicons' => 'dashicons-cart',
-		'atoms' => 'po'
+	[
+	 'page' => 'HOME',
+	 'title' => 'jakiś tytuł',
+	 'description' => 'główny opis dla sekcji',
+	 'dashicons' => 'dashicons-format-status',
+	 'atoms' => [
+			 [
+			 'title' => 'Imię',
+			 'name' => 'logdo',
+			 'type' => 'images',
+			 'placeholder' => 'Imię i nazwisko',
+			 'description' => 'Proszę uzupełnić dane',
+			 ]
+		 ]
 	]
 
 ]);
 
-function przed(){
-	return 'wynik: działa przed!';
-}
-function po(){
-	return 'wynik: działa po!';
-}
 
 ```
