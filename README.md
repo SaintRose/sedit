@@ -11,13 +11,13 @@ w obsłudze i bardzo czytelny. Wtyczka jest kompatybilna z każdym motywem.
 Czysty motyw przygotowany do szybkiej integracji z wtyczką:
 
 ```bash
-$ git clone git@github.com:piotrseed/theme.git
+git clone git@github.com:piotrseed/theme.git
 ```
 
 Wtyczka instalacja w głównym katalogu motywu:
 
 ```bash
-$ git clone git@github.com:piotrseed/sedit.git
+git clone git@github.com:piotrseed/sedit.git
 ```
 
 
