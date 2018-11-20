@@ -262,6 +262,18 @@ function funkcja_po(){
 }
 ```
 
+## Kompatybilność
+
+Wtyczka jest testowana i kompatybilna z:
+
+1. Polylang https://pl.wordpress.org/plugins/polylang/
+2. TinyMCE Advanced https://pl.wordpress.org/plugins/tinymce-advanced/
+3. Post Types Order https://pl.wordpress.org/plugins/post-types-order/
+4. Category Order and Taxonomy Terms Order https://pl.wordpress.org/plugins/taxonomy-terms-order/
+5. Lightbox https://pl.wordpress.org/plugins/mpcx-lightbox/
+
+Nie powinno być problemów ze współpracą z innymi wtyczkami
+
 ## Licencja
 
 Skontaktuj się ze mną: piotrseed@gmail.com
