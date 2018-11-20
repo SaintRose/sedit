@@ -109,7 +109,11 @@ body {
   border-bottom: 1px solid #EBEBEB;
   padding-bottom: 10px;
   margin-bottom: 5px;
+  margin-top: 50px;
   display: block;
+}
+.seditform ul li h3 i {
+  margin-right: 5px;
 }
 .seditform ul li label {
   font-size: 14px;
@@ -195,6 +199,10 @@ body {
   border: 1px solid #E7E7E7;
   box-shadow: 0 !important;
   margin-bottom: -2px;
+}
+.nav-tab-sedit .nav-tab span {
+  font-size: 17px;
+  margin-top: 2px;
 }
 .nav-tab-sedit .nav-tab-active {
   background: #F6F6F6;

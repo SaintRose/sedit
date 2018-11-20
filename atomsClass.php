@@ -205,8 +205,8 @@ class seditAtoms extends seditModules
 	function atomTitle($option){
 		$atom = '
 		<ul>
-			<li style="margin-top:50px;">
-				<h3><i style="color:#808080;" class="fas fa-file"></i> '.$option['title'].'</h3>
+			<li>
+				<h3><i class="fas fa-file"></i> '.$option['title'].'</h3>
 				<p>'.$option['description'].'</p>
 			</li>
 		</ul>
@@ -229,8 +229,12 @@ class seditAtoms extends seditModules
 		function switch_atoms($dataSwitch, $get_page){
 			$first = $_GET['tab'];// OR empty($first)
 				foreach ($dataSwitch as $pageTab => $pageArray) {
+					// echo '<pre>';
+					// print_r($pageTab);
+					// echo '</pre>';
 				//opisy dla sekcji
-				if (string_for_save($pageTab) === string_for_save($get_page)  OR $first === null) {
+
+				if ($pageTab == $get_page) {
 					$first = true;
 					$head = null;
 					$text = null;
@@ -238,7 +242,7 @@ class seditAtoms extends seditModules
 					$head .= '
 					<ul>
 				 		<li>
-							<h3><i style="color:#808080;" class="fas fa-file"></i> '.$pageArray['title'].$page.'</h3>
+							<h3 style="margin:0;"><i class="fas fa-file"></i> '.$pageArray['title'].$page.'</h3>
 							<p>'.$pageArray['description'].'</p>
 						</li>
 				 	</ul>

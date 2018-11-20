@@ -1,14 +1,12 @@
 <?php
 require_once 'atomsClass.php';
-require_once 'tabsClass.php';
-require_once 'pagesClass.php';
+require_once 'pageClass.php';
+//require_once 'pagesClass.php';
 include 'slider.php';
-use SEDIT\seditPages;
-use SEDIT\seditTabs;
+use SEDIT\seditPage;
 use SEDIT\seditAtoms;
 
-$sTabs = new seditTabs();
-$sPages = new seditPages();
+$sedit = new seditPage();
 
 
 

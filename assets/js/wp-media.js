@@ -53,6 +53,7 @@ jQuery(document).ready(function($) {
         //console.log(attachment);
         $('.hide-img-' + dataID).hide();
         //$(".term-group-" + dataID).append("<img src=" +attachment.url+">");
+        //$(".sort-images-" + dataID).html('');
         $(".sort-images-" + dataID).append('<div class="image-theme ui-sortable-handle"><input name="' + nameField + '[]" value="' + attachment.id + '" type="hidden"><img src="' + attachment.sizes.thumbnail.url + '"></div>');
         var multi = $(field).val();
         $(field).val('');

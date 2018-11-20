@@ -95,6 +95,20 @@ $sPages->pageData([
 			 'description' => 'Proszę uzupełnić dane',
 			 ]
 		 ]
+	],[
+	 'page' => 'HOME',
+	 'title' => 'jakiś tytuł',
+	 'description' => 'główny opis dla sekcji',
+	 'dashicons' => 'dashicons-format-status',
+	 'atoms' => [
+			 [
+			 'title' => 'Imię',
+			 'name' => 'logdo',
+			 'type' => 'images',
+			 'placeholder' => 'Imię i nazwisko',
+			 'description' => 'Proszę uzupełnić dane',
+			 ]
+		 ]
 	]
 
 ]);
