@@ -152,7 +152,7 @@ Przełączenie stron typu stron `PAGE` <-> `TABS` jest kompatybilne i działa w 
 $sedit->pagesData()   <-->   $sedit->tabsData()
 ```
 
-### Atom TITLE
+### Atom `TITLE`
 
 ```toJSON
 
@@ -164,7 +164,7 @@ $sedit->pagesData()   <-->   $sedit->tabsData()
 
 ```
 
-### Atom INPUT
+### Atom `INPUT`
 
 ```toJSON
 
@@ -178,7 +178,7 @@ $sedit->pagesData()   <-->   $sedit->tabsData()
 
 ```
 
-### Atom TEXTAREA
+### Atom `TEXTAREA`
 
 ```toJSON
 
@@ -192,7 +192,7 @@ $sedit->pagesData()   <-->   $sedit->tabsData()
 
 ```
 
-### Atom IMAGE (pojedyńczy obraz)
+### Atom `IMAGE` (pojedyńczy obraz)
 
 ```toJSON
 
@@ -205,7 +205,7 @@ $sedit->pagesData()   <-->   $sedit->tabsData()
 
 ```
 
-### Atom IMAGES (wiele obrazów, sortowanie)
+### Atom `IMAGES` (wiele obrazów, sortowanie)
 
 ```toJSON
 
