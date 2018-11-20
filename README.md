@@ -162,6 +162,8 @@ Atom TITLE
 'description' => 'Opis pod tytułem',
 ]
 
+```
+
 Atom INPUT
 
 ```toJSON
@@ -259,10 +261,7 @@ function funkcja_po(){
 	return true;
 }
 ```
-/// nie działa poprawnie rozne atomy dla roznych stron
-// wyswietlanie funkcji na stronie i w atomie
-// 'function_before' => 'przed',
-// 'function_after' => 'po',
+
 ## Licencja
 
 Skontaktuj się ze mną: piotrseed@gmail.com
