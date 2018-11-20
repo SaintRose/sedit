@@ -24,14 +24,13 @@ register_nav_menus( array(
 	'top'    => 'Menu główne'
 ) );
 
-$sTabs->pageTabsData([
+$sedit->pagesData([
 
 	 [
 		'page' => 'HOME',
 		'title' => 'jakiś tytuł',
 		'description' => 'główny opis dla sekcji',
-		'function_before' => 'przed',
-		'function_after' => 'po',
+		'dashicons' => 'dashicons-admin-tools',
 		'atoms' => [
 			  [
 				'title' => 'Imię',
@@ -39,8 +38,6 @@ $sTabs->pageTabsData([
 				'type' => 'images',
 				'placeholder' => 'Imię i nazwisko',
 				'description' => 'Proszę uzupełnić dane',
-				'function_before' => 'przed',
-				'function_after' => 'po',
 				],[
 				'title' => 'Zdjęcie',
 				'name' => 'foto',
@@ -78,40 +75,68 @@ $sTabs->pageTabsData([
 	]
 
 ]);
-/// nie działa poprawnie rozne atomy dla roznych stron
-$sPages->pageData([
+$sedit->tabsData([
 
-	[
-	 'page' => 'HOME',
-	 'title' => 'jakiś tytuł',
-	 'description' => 'główny opis dla sekcji',
-	 'dashicons' => 'dashicons-format-status',
-	 'atoms' => [
-			 [
-			 'title' => 'Imię',
-			 'name' => 'logdo',
-			 'type' => 'images',
-			 'placeholder' => 'Imię i nazwisko',
-			 'description' => 'Proszę uzupełnić dane',
-			 ]
-		 ]
-	],[
-	 'page' => 'HOME',
-	 'title' => 'jakiś tytuł',
-	 'description' => 'główny opis dla sekcji',
-	 'dashicons' => 'dashicons-format-status',
-	 'atoms' => [
-			 [
-			 'title' => 'Imię',
-			 'name' => 'logdo',
-			 'type' => 'images',
-			 'placeholder' => 'Imię i nazwisko',
-			 'description' => 'Proszę uzupełnić dane',
-			 ]
-		 ]
+	 [
+		'page' => 'HOME',
+		'title' => 'jakiś tytuł',
+		'description' => 'główny opis dla sekcji',
+		'dashicons' => 'dashicons-admin-tools',
+		'atoms' => [
+			  [
+				'title' => 'Imię',
+				'name' => 'logdo',
+				'type' => 'images',
+				'placeholder' => 'Imię i nazwisko',
+				'description' => 'Proszę uzupełnić dane',
+				],[
+				'title' => 'Zdjęcie',
+				'name' => 'foto',
+				'type' => 'input',
+				'placeholder' => 'input',
+				'description' => 'Kliknij aby wybrać z biblioteki mediów.'
+				],[
+				'title' => 'Zdjęcie',
+				'name' => 'foto',
+				'type' => 'title',
+				'placeholder' => 'input',
+				'description' => 'Kliknij aby wybrać z biblioteki mediów.'
+				],[
+				'title' => 'Zdjęcie',
+				'name' => 'foto',
+				'type' => 'imagess',
+				'placeholder' => 'input',
+				'description' => 'Kliknij aby wybrać z biblioteki mediów.'
+				]
+			]
+	 ],
+
+	 [
+		'page' => 'Google maps',
+		'title' => 'jakiś tytuł',
+		'description' => 'główny opis dla sekcji',
+		'dashicons' => 'dashicons-admin-network',
+		'atoms' => [
+			'Google' => [
+				'name' => 'googlecddss',
+				'type' => 'module:google',
+				'placeholder' => 'Imię i nazwisko',
+				'description' => 'Proszę uzupełnić dane'
+				]
+			]
 	]
 
 ]);
+/// nie działa poprawnie rozne atomy dla roznych stron
+// wyswietlanie funkcji na stronie i w atomie
+// 'function_before' => 'przed',
+// 'function_after' => 'po',
 
+function przed(){
+	return 'wynik: działa przed!';
+}
+function po(){
+	return 'wynik: działa po!';
+}
 
 ```
