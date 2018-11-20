@@ -3,7 +3,7 @@ _wersja 1.0 (stabilna)_
 
 `sedit` to wtyczka służąca do budowania przyjaznych interfejsów administracyjnych w WP
 została zbudowana w oparciu o potrzeby prywatne. Panel Adminstracyjny staje się prosty
-w obsłudze i bardzo czytelny. Wtyczka jest kompatybilna z kazdym motywem.
+w obsłudze i bardzo czytelny. Wtyczka jest kompatybilna z każdym motywem.
 
 
 ## Instalacja
@@ -14,7 +14,7 @@ Czysty motyw przygotowany do szybkiej integracji z wtyczką:
 $ git clone git@github.com:piotrseed/theme.git
 ```
 
-Wtyczka instalacja w głównym katalogu motywu
+Wtyczka instalacja w głównym katalogu motywu:
 
 ```bash
 $ git clone git@github.com:piotrseed/sedit.git
@@ -23,7 +23,7 @@ $ git clone git@github.com:piotrseed/sedit.git
 
 ## Aktywacja
 
-TAby aktywować wtyczkę nazeży w pliku `functions.php` umieścic kod:
+Aby aktywować wtyczkę należy w pliku `functions.php` umieścic kod:
 
 ```php
 include 'sedit/core.php';
