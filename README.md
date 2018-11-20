@@ -154,7 +154,7 @@ function po(){
 
 
 # SEEDIT
-_ wersja 1.0 (stabilna) _
+_wersja 1.0 (stabilna)_
 
 `sedit` to wtyczka służąca do budowania przyjaznych interfejsów administracyjnych w WP
 została zbudowana w oparciu o potrzeby prywatne. Panel Adminstracyjny staje się prosty
@@ -301,21 +301,23 @@ $sedit->tabsData([
 ### Uwagi
 
 Przełączenie stron typu stron `PAGE` <-> `TABS` jest kompatybilne i działa w obie strony
-_ Przykład _
+
 
 ```php
 $sedit->pagesData()   <-->   $sedit->tabsData()
 ```
 
-| Dostępne atomy        |                    |
-| ----------------- | ------------------ |
-| `bounce`          | `flash`            |
-| `shake`           | `headShake`        |
-| `wobble`          | `jello`            |
-| `bounceInLeft`    | `bounceInRight`    |
-| `bounceOutDown`   | `bounceOutLeft`    |
-| `fadeIn`          | `fadeInDown`       |
-| `fadeInLeftBig`   | `fadeInRight`      |
+```toJSON
+
+[
+'title' => 'Imię',
+'name' => 'logdo',
+'type' => 'input',
+'placeholder' => 'Imię i nazwisko',
+'description' => 'Proszę uzupełnić dane',
+]
+
+```
 
 
 Full example:
