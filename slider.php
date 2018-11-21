@@ -1,6 +1,7 @@
 <?php
 /**
  * SLIDER piotrseed@gmail.com
+ *dd
  */
 class seditSlider
 {
