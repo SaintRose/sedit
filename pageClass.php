@@ -65,13 +65,15 @@ class seditPage extends seditAtoms
 			<div class="nav-tab-wrapper nav-tab-sedit">
 				<?php
 					$first = $_GET['tab'];
-					foreach ($this->tabs as $pageTab => $pageArray) {
-						$name = string_for_save($pageTab);
-						echo '<a href="?page=ustawienia&tab='.$name.'"
-										class="nav-tab '.(($active_tab === $name OR $first === null) ? 'nav-tab-active' : '').'">
-										'.(($pageArray['dashicons']) ? '<span class="dashicons '.$pageArray['dashicons'].'"></span>' : '').'
-										'.$pageArray['page'].'</a>';
-						$first = true;
+					if ($this->tabs) {
+						foreach ($this->tabs as $pageTab => $pageArray) {
+							$name = string_for_save($pageTab);
+							echo '<a href="?page=ustawienia&tab='.$name.'"
+											class="nav-tab '.(($active_tab === $name OR $first === null) ? 'nav-tab-active' : '').'">
+											'.(($pageArray['dashicons']) ? '<span class="dashicons '.$pageArray['dashicons'].'"></span>' : '').'
+											'.$pageArray['page'].'</a>';
+							$first = true;
+						}
 					}
 				 ?>
 			</div>

@@ -228,6 +228,7 @@ class seditAtoms extends seditModules
 
 		function switch_atoms($dataSwitch, $get_page){
 			$first = $_GET['tab'];// OR empty($first)
+			if ($dataSwitch) {
 				foreach ($dataSwitch as $pageTab => $pageArray) {
 					// echo '<pre>';
 					// print_r($pageTab);
@@ -241,11 +242,11 @@ class seditAtoms extends seditModules
 					// atomy
 					$head .= '
 					<ul>
-				 		<li>
+						<li>
 							<h3 style="margin:0;"><i class="fas fa-file"></i> '.$pageArray['title'].$page.'</h3>
 							<p>'.$pageArray['description'].'</p>
 						</li>
-				 	</ul>
+					</ul>
 					';
 					//akcja funkcji przed wszystkimi atomami
 					if (!empty($pageArray['function_before'])) {
@@ -344,5 +345,14 @@ class seditAtoms extends seditModules
 					echo $head.$text;
 				}
 			}
+		}else{
+			echo '
+			<ul>
+				<li>
+					<p><i class="fas fa-database"></i> Brak danych konfiguracyjnych</p>
+				</li>
+			</ul>
+			';
+		}
 		}
 }
