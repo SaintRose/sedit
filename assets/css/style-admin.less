@@ -97,6 +97,7 @@ body{
 }
 ////////////////////////////////////////////////////////////////////////////////////////
 //form
+
 .seditform{
   background: #F6F6F6;
   border: 1px solid #E7E7E7;
@@ -188,6 +189,22 @@ body{
     }
   }
 }
+/////////////////////////////////////////////////////////
+#page_metabox{
+  .inside{
+    .seditform();
+    background: none;
+    border: none;
+    ul{
+      li{
+        input,textarea,p,span{
+          max-width: 100%;
+        }
+      }
+    }
+  }
+}
+/////////////////////////////////////////////////////////
 //NAVTAB
 .nav-tab-sedit{
   border-bottom: none;

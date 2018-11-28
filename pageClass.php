@@ -20,7 +20,7 @@ class seditPage extends seditAtoms
 ///////////////////////////////TYPE PAGES/////////////////////////////////
 	// Pobranie wszytkich danych
 	function pagesData($data){
-		$this->pages = $data;
+		return $this->pages = $data;
 	}
   function pagesMenu(){
 
@@ -47,7 +47,7 @@ class seditPage extends seditAtoms
 /////////////////////////////////////TYPE TABS//////////////////////////////////////
 	// Pobranie wszytkich danych
 	function tabsData($data){
-		$this->tabs = $data;
+		return $this->tabs = $data;
 	}
 	function pageTabsInit(){
 		$title_blog = get_bloginfo('title');

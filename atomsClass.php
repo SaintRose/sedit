@@ -10,10 +10,11 @@ class seditAtoms extends seditModules
 
 	function __construct()
 	{
-		// code
+
 	}
 // INPUT
-	public function atomInput($postID, $option){
+	public function atomInput($option){
+		$postID = get_the_id();
 		save_option($option['name'], $postID);
 		$atom = null;
 		$atom = '
@@ -26,13 +27,13 @@ class seditAtoms extends seditModules
 				<input
 					name="'.$option['name'].'"
 					id="'.$option['name'].'"
-					value="'.get_option($option['name']).'"
+					value="'.sedit($postID, $option['name'], "value", null, $random).'"
 					placeholder="'.$option['placeholder'].'"
 					type="text">
 
 				'.((!empty($option['description'])) ? '<em>'.$option['description'].'</em>' : '').'
 
-				<l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit(null, \''.$option['name'].'\', \'option\', null, null); ?>').'</label></l>
+				<l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit('.$postID.', \''.$option['name'].'\', \'value\'); ?>').'</label></l>
 
 			</li>
 		</ul>
@@ -40,7 +41,8 @@ class seditAtoms extends seditModules
 		return $atom;
 	}
 // TEXTAREA
-	function atomTextarea($postID, $option){
+	function atomTextarea($option){
+		$postID = get_the_id();
 		save_option($option['name'], $postID);
 		$atom = null;
 		$atom = '
@@ -56,11 +58,11 @@ class seditAtoms extends seditModules
 					placeholder="'.$option['placeholder'].'"
 					class="regular-text"
 					rows="5"
-					>'.get_option($option['name']).'</textarea>
+					>'.sedit($postID, $option['name'], "value", null, $random).'</textarea>
 
 				'.((!empty($option['description'])) ? '<em>'.$option['description'].'</em>' : '').'
 
-				<l class="front-code-php"><l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit(null, \''.$option['name'].'\', \'option\', null, null); ?>').'</label></l></l>
+				<l class="front-code-php"><l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit('.$postID.', \''.$option['name'].'\', \'value\'); ?>').'</label></l></l>
 
 			</li>
 		</ul>
@@ -68,7 +70,8 @@ class seditAtoms extends seditModules
 		return $atom;
 	}
 // WPEDITOR
-	function atomWpeditor($postID, $option){
+	function atomWpeditor($option){
+		$postID = get_the_id();
 		save_option($option['name'], $postID);
 		$atom = null;
 		$atom = '
@@ -82,7 +85,7 @@ class seditAtoms extends seditModules
 				'.((!empty($option['description'])) ? '<em>'.$option['description'].'</em>' : '').'
 
 				<l class="front-code-php">
-						<l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit(null, \''.$option['name'].'\', \'option\', null, null); ?>').'</label></l>
+						<l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit('.$postID.', \''.$option['name'].'\', \'value\'); ?>').'</label></l>
 				</l>
 
 			</li>
@@ -91,7 +94,8 @@ class seditAtoms extends seditModules
 		return $atom;
 	}
 // IMAGE
-	function atomImage($postID, $option){
+	function atomImage($option){
+		$postID = get_the_id();
 		save_option($option['name'], $postID);
 		if ($option['size'] === 'marker') {
 			$size = 'marker';
@@ -121,7 +125,7 @@ class seditAtoms extends seditModules
 
 					'.((!empty($option['description'])) ? ''.((!empty($option['description'])) ? '<em>'.$option['description'].'</em>' : '').'' : '').'
 
-					<l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit(null, \''.$option['name'].'\', \'image\', \'thumb350\', null); ?>').'</label></l>
+					<l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit('.$postID.', \''.$option['name'].'\', \'image\', \'thumb350\'); ?>').'</label></l>
 
 					<span>'.sedit($postID, $option['name'], 'image', $size, $random).'</span>
 
@@ -131,7 +135,8 @@ class seditAtoms extends seditModules
 		return $atom;
 	}
 	// IMAGES
-		function atomImages($postID, $option){
+		function atomImages($option){
+			$postID = get_the_id();
 			save_option($option['name'], $postID);
 			if ($option['size'] === 'marker') {
 				$size = 'marker';
@@ -169,13 +174,15 @@ class seditAtoms extends seditModules
 
 						'.((!empty($option['description'])) ? ''.((!empty($option['description'])) ? '<em>'.$option['description'].'</em>' : '').'' : '').'
 
-						<l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit(null, \''.$option['name'].'\', \'images\', \'thumb350\', null); ?>').'</label></l>
+						<l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit('.$postID.', \''.$option['name'].'\', \'images\', \'thumb350\', null); ?>').'</label></l>
 
 						<span class="">
 						<div class="sort-images sort-images-'.$random .' crash-all-image-'.$random .'">';
-						$data = sedit($postID, $option['name'], "value", null, null);
-	          if ($data) {
-	          	$get_id_image = explode(",", $data );
+						$get_id_image = sedit($postID, $option['name'], "value", null, null);
+	          if ($get_id_image) {
+	          	if (!is_array($get_id_image)) {
+	          		$get_id_image = explode(",", $get_id_image );
+	          	}
 							foreach ($get_id_image as $key => $value) {
 		            $image_attributes = wp_get_attachment_image_src($value, 'thumb100');
 								$rand = rand(0, 10000);
@@ -228,10 +235,11 @@ class seditAtoms extends seditModules
 
 		function switch_atoms($dataSwitch, $get_page){
 			$first = $_GET['tab'];// OR empty($first)
-			if ($dataSwitch) {
+			if (is_array($dataSwitch)) {
+
 				foreach ($dataSwitch as $pageTab => $pageArray) {
 					// echo '<pre>';
-					// print_r($pageTab);
+					// print_r($pageArray);
 					// echo '</pre>';
 				//opisy dla sekcji
 
@@ -273,25 +281,25 @@ class seditAtoms extends seditModules
 							// atom
 							switch ($option['type']) {
 								case 'input':
-									$text .= $this->atomInput($post->ID, $option);
+									$text .= $this->atomInput($option);
 									break;
 								case 'textarea':
-									$text .= $this->atomTextarea($post->ID, $option);
+									$text .= $this->atomTextarea($option);
 									break;
 								case 'wpeditor':
-									$text .= $this->atomWpeditor($post->ID, $option);
+									$text .= $this->atomWpeditor($option);
 									break;
 								case 'image':
-									$text .= $this->atomImage($post->ID, $option);
+									$text .= $this->atomImage($option);
 									break;
 								case 'images':
-									$text .= $this->atomImages($post->ID, $option);
+									$text .= $this->atomImages($option);
 									break;
 								case 'title':
 									$text .= $this->atomTitle($option);
 									break;
 								case 'link':
-									$text .= $this->atomLink($post->ID, $option);
+									$text .= $this->atomLink($option);
 									break;
 								case 'module:google':
 									$text .= seditModules::moduleGoogle();

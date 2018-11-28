@@ -1,12 +1,14 @@
 <?php
 require_once 'atomsClass.php';
 require_once 'pageClass.php';
-//require_once 'pagesClass.php';
+require_once 'postTypeClass.php';
 include 'slider.php';
 use SEDIT\seditPage;
 use SEDIT\seditAtoms;
+use SEDIT\seditPostType;
 
 $sedit = new seditPage();
+$postType = new seditPostType();
 
 
 
@@ -50,39 +52,66 @@ add_image_size( 'brama', 355, 800, true );
 add_theme_support( 'post-thumbnails' );
 
 //////////////Zapisanie ustawień///////////////
+
+// echo "<pre>";
+// print_r( $_REQUEST );
+// echo "</pre>";
 function save_option($name, $type){
-	if ( isset( $_POST['submit'] ) && $_POST['submit'] != '' ) {
+	if ( isset( $_POST['submit'] ) OR isset( $_POST['save'] ) ) {
 			if (is_array($_POST[$name])) {
 				foreach ($_POST[$name] as $img_key => $img_value) {
 					$idimg .= $img_value.',';
 				}
-				//update_post_meta( $type, $name, $idimg);
 				$_POST[$name] = $idimg;
-		}
-		update_option( $name, $_POST[$name] );
-	} // do poprawi sapis dla meta post
+			}
+			update_option( $name, $_POST[$name] );
+	}
 }
+
+
+
+
+
+
+// $data1 = $postType->postData();
+// echo "<pre>";
+// print_r( $data1 );
+// echo "</pre>";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //////////////Pobranie multi info///////////////
-// POST_TYPE_ID custom post czy ustawienia
+// POSTID custom post czy ustawienia
 // NAME nazwa zmiennej
 // TYPE wyświetlanie wartości string lub obrazka
 // SIZE rozmiar zdeginiowany w add_image_size
 // ID losowy ciąc znaków int okreslający kontener
-function sedit($post_type_id, $name, $type, $size, $id){
+function sedit($postID = null, $name = null, $type = null, $size = null, $id = null){
 
-  if (!empty($post_type_id)) {
-    $up_img = get_post_meta( $post_type_id, $name, true );
+  if (!empty($postID)) {
+    $up_img = get_post_meta( $postID, $name, true );
   }else {
     $up_img = get_option($name);
   }
 	switch ($type) {
 		case 'value':
-				return nl2br($up_img);
+				return $up_img;
 			break;
 
 		case 'option':
 
-				return nl2br($up_img);
+				return $up_img;
 			break;
 
 		case 'file':
@@ -112,13 +141,15 @@ function sedit($post_type_id, $name, $type, $size, $id){
 
 		case 'images':
 			$get_id_image = explode(",", $up_img);
-			foreach ($get_id_image as $key => $value) {
-				$image_attributes = wp_get_attachment_image_src($value, 'thumb100');
-				if ($image_attributes) {
-					$text .= '
-					<div class="sedit-img-'.$key.'">
-						<img src="'.$image_attributes[0].'">
-					</div>';
+			if ($get_id_images) {
+				foreach ($get_id_image as $key => $value) {
+					$image_attributes = wp_get_attachment_image_src($value, 'thumb100');
+					if ($image_attributes) {
+						$text .= '
+						<div class="sedit-img-'.$key.'">
+							<img src="'.$image_attributes[0].'">
+						</div>';
+					}
 				}
 			}
 			return $text;
