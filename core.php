@@ -140,10 +140,12 @@ function sedit($postID = null, $name = null, $type = null, $size = null, $id = n
 			break;
 
 		case 'images':
-			$get_id_image = explode(",", $up_img);
-			if ($get_id_images) {
-				foreach ($get_id_image as $key => $value) {
-					$image_attributes = wp_get_attachment_image_src($value, 'thumb100');
+			if ($up_img) {
+				if (!is_array($up_img)) {
+					$get_id_image = explode(",", $up_img );
+				}
+				foreach ($up_img as $key => $value) {
+					$image_attributes = wp_get_attachment_image_src($value, $size);
 					if ($image_attributes) {
 						$text .= '
 						<div class="sedit-img-'.$key.'">
