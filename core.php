@@ -1,14 +1,12 @@
 <?php
 require_once 'atomsClass.php';
 require_once 'pageClass.php';
-require_once 'postTypeClass.php';
 include 'slider.php';
 use SEDIT\seditPage;
 use SEDIT\seditAtoms;
-use SEDIT\seditPostType;
 
 $sedit = new seditPage();
-$postType = new seditPostType();
+
 
 
 
@@ -52,10 +50,8 @@ add_image_size( 'brama', 355, 800, true );
 add_theme_support( 'post-thumbnails' );
 
 //////////////Zapisanie ustawień///////////////
-
-// echo "<pre>";
-// print_r( $_REQUEST );
-// echo "</pre>";
+// NAME nazwa atomu
+// NAME nazwa wartosci
 function save_option($name, $type){
 	if ( isset( $_POST['submit'] ) OR isset( $_POST['save'] ) ) {
 			if (is_array($_POST[$name])) {
@@ -67,29 +63,6 @@ function save_option($name, $type){
 			update_option( $name, $_POST[$name] );
 	}
 }
-
-
-
-
-
-
-// $data1 = $postType->postData();
-// echo "<pre>";
-// print_r( $data1 );
-// echo "</pre>";
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //////////////Pobranie multi info///////////////
 // POSTID custom post czy ustawienia

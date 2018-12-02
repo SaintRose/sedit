@@ -13,8 +13,13 @@ class seditPage extends seditAtoms
 
 	function __construct()
 	{
+		//Konfigutacja dla //TYPE TABS//
 		add_action('admin_menu', array($this, 'pageTabsInit'));
+		//Konfigutacja dla //TYPE PAGES//
 	  add_action('admin_menu', array($this, 'pagesMenu'));
+		//Konfigutacja dla //POST TYPE//
+		add_action( 'add_meta_boxes', array($this, 'page_create_metabox') );
+		add_action( 'save_post', array($this, 'sedit_save_post') );
 	}
 
 ///////////////////////////////TYPE PAGES/////////////////////////////////
@@ -89,8 +94,44 @@ class seditPage extends seditAtoms
 	 </div>
 		<?php
 	}
-///////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////POST TYPE//////////////////////////////////////
 
+
+function postTypeData($data){
+	$this->data = $data;
+}
+
+function page_create_metabox() {
+	if ($this->data) {
+		foreach ($this->data as $key => $postPage) {
+			$this->posttype = $postPage['posttype'];
+			$this->atoms = $postPage['atoms'];
+				 add_meta_box(
+					'page_metabox',
+					'Karta',
+					array($this, 'page_render_metabox'),
+					$this->posttype,
+					'normal',
+					'default'
+				);
+			}
+	}
+}
+
+function sedit_save_post( $post_id ){
+	if (is_array($this->data)) {
+		foreach ($this->data as $key => $array) {
+			foreach ($array['atoms'] as $keyatom => $value) {
+				update_post_meta( $post_id, $value['name'], $_POST[$value['name']]);
+			}
+		}
+	}
+}
+
+function page_render_metabox(){
+	echo seditAtoms::switch_atoms($this->data, 'posttype');
+}
+////////////////////////////////////////////////////////////////////////////
 
 
 

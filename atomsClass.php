@@ -233,51 +233,35 @@ class seditAtoms extends seditModules
 		return $atom;
 	}
 
-		function switch_atoms($dataSwitch, $get_page){
-			$first = $_GET['tab'];// OR empty($first)
+
+	function switch_atoms($dataSwitch, $get_page){
+			$posttype = get_post_type();
+			if ($_GET['page']) {
+				$get_page = 0;
+			}
 			if (is_array($dataSwitch)) {
-
-				foreach ($dataSwitch as $pageTab => $pageArray) {
-					// echo '<pre>';
-					// print_r($pageArray);
-					// echo '</pre>';
-				//opisy dla sekcji
-
-				if ($pageTab == $get_page) {
-					$first = true;
-					$head = null;
-					$text = null;
+				foreach ($dataSwitch as $pageTab => $data) {
+				// 	echo '<pre>';
+				// 	print_r($data);
+				// 	echo '</pre>';
+				if (strval($pageTab) == strval($get_page) OR $data['posttype'] === $posttype) {
+					$first = true; $head = null; $text = null;
 					// atomy
 					$head .= '
 					<ul>
 						<li>
-							<h3 style="margin:0;"><i class="fas fa-file"></i> '.$pageArray['title'].$page.'</h3>
-							<p>'.$pageArray['description'].'</p>
+							<h3 style="margin:0;"><i class="fas fa-file"></i> '.$data['title'].'</h3>
+							<p>'.$data['description'].'</p>
 						</li>
 					</ul>
 					';
 					//akcja funkcji przed wszystkimi atomami
-					if (!empty($pageArray['function_before'])) {
-						$text .= '
-						<ul>
-							<li>
-								<p>'.call_user_func($pageArray['function_before']).'</p>
-							</li>
-						</ul>
-						';
-					}
-				if (is_array($pageArray['atoms'])) {
-				foreach ($pageArray['atoms'] as $title => $option) {
+				$text .= $this->hook_function($data['function_before']);
+
+				if (is_array($data['atoms'])) {
+				foreach ($data['atoms'] as $title => $option) {
 							//akcja funkcji przed atomem
-							if (!empty($option['function_before'])) {
-								$text .= '
-								<ul>
-									<li>
-										<p>'.call_user_func($pageArray['function_before']).'</p>
-									</li>
-								</ul>
-								';
-							}
+							$text .= $this->hook_function($data['function_before']);
 							// atom
 							switch ($option['type']) {
 								case 'input':
@@ -309,26 +293,10 @@ class seditAtoms extends seditModules
 								break;
 							}
 							//akcja funkcji po atome
-							if (!empty($option['function_after'])) {
-								$text .= '
-								<ul>
-									<li>
-										<p>'.call_user_func($pageArray['function_after']).'</p>
-									</li>
-								</ul>
-								';
-							}
+							$text .= $this->hook_function($data['function_after']);
 						}
 						//akcja po wszystkich atomach
-						if (!empty($pageArray['function_after'])) {
-							$text .= '
-							<ul>
-								<li>
-									<p>'.call_user_func($pageArray['function_after']).'</p>
-								</li>
-							</ul>
-							';
-						}
+						$text .= $this->hook_function($data['function_after']);
 
 						$text .= '
 						<ul>
@@ -340,15 +308,7 @@ class seditAtoms extends seditModules
 
 					}else{
 						//akcja funkcji gdy brak atomow
-						if (!empty($pageArray['atoms'])) {
-							$text .= '
-							<ul>
-								<li>
-									<p>'.call_user_func($pageArray['atoms']).'</p>
-								</li>
-							</ul>
-							';
-						}
+						$text .= $this->hook_function($data['atoms']);
 					}
 					echo $head.$text;
 				}
@@ -362,5 +322,18 @@ class seditAtoms extends seditModules
 			</ul>
 			';
 		}
+	}
+
+		function hook_function($name_function){
+			if (!empty($name_function)) {
+				$text = '
+				<ul>
+					<li>
+						<p>'.call_user_func($name_function).'</p>
+					</li>
+				</ul>
+				';
+				return $text;
+			}
 		}
 }
