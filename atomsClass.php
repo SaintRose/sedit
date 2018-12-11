@@ -33,7 +33,8 @@ class seditAtoms extends seditModules
 
 				'.((!empty($option['description'])) ? '<em>'.$option['description'].'</em>' : '').'
 
-				<l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit('.$postID.', \''.$option['name'].'\', \'value\'); ?>').'</label></l>
+
+				<l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit('.(($postID) ? $postID : 'null').', \''.$option['name'].'\', \'value\'); ?>').'</label></l>
 
 			</li>
 		</ul>
@@ -62,7 +63,7 @@ class seditAtoms extends seditModules
 
 				'.((!empty($option['description'])) ? '<em>'.$option['description'].'</em>' : '').'
 
-				<l class="front-code-php"><l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit('.$postID.', \''.$option['name'].'\', \'value\'); ?>').'</label></l></l>
+				<l class="front-code-php"><l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit('.(($postID) ? $postID : 'null').', \''.$option['name'].'\', \'value\'); ?>').'</label></l></l>
 
 			</li>
 		</ul>
@@ -85,7 +86,7 @@ class seditAtoms extends seditModules
 				'.((!empty($option['description'])) ? '<em>'.$option['description'].'</em>' : '').'
 
 				<l class="front-code-php">
-						<l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit('.$postID.', \''.$option['name'].'\', \'value\'); ?>').'</label></l>
+						<l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit('.(($postID) ? $postID : 'null').', \''.$option['name'].'\', \'value\'); ?>').'</label></l>
 				</l>
 
 			</li>
@@ -125,7 +126,7 @@ class seditAtoms extends seditModules
 
 					'.((!empty($option['description'])) ? ''.((!empty($option['description'])) ? '<em>'.$option['description'].'</em>' : '').'' : '').'
 
-					<l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit('.$postID.', \''.$option['name'].'\', \'image\', \'thumb350\'); ?>').'</label></l>
+					<l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit('.(($postID) ? $postID : 'null').', \''.$option['name'].'\', \'image\', \'thumb350\'); ?>').'</label></l>
 
 					<span>'.sedit($postID, $option['name'], 'image', $size, $random).'</span>
 
@@ -174,7 +175,7 @@ class seditAtoms extends seditModules
 
 						'.((!empty($option['description'])) ? ''.((!empty($option['description'])) ? '<em>'.$option['description'].'</em>' : '').'' : '').'
 
-						<l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit('.$postID.', \''.$option['name'].'\', \'images\', \'thumb350\', null); ?>').'</label></l>
+						<l class="front-code-php"><label id="copy-'.$option['name'].'">'.htmlspecialchars('<?php echo sedit('.(($postID) ? $postID : 'null').', \''.$option['name'].'\', \'images\', \'thumb350\', null); ?>').'</label></l>
 
 						<span class="">
 						<div class="sort-images sort-images-'.$random .' crash-all-image-'.$random .'">';

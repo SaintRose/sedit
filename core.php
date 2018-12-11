@@ -54,7 +54,9 @@ add_theme_support( 'post-thumbnails' );
 // NAME nazwa wartosci
 function save_option($name, $type){
 	if ( isset( $_POST['submit'] ) OR isset( $_POST['save'] ) ) {
+
 			if (is_array($_POST[$name])) {
+
 				foreach ($_POST[$name] as $img_key => $img_value) {
 					$idimg .= $img_value.',';
 				}
