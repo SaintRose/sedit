@@ -115,6 +115,9 @@ function table_slider_content( $column_name, $post_id ) {
     	echo get_post_meta( $post_id, 'option2', true ).'<br>';
     	echo get_post_meta( $post_id, 'option3', true ).'<br>';
     	echo get_post_meta( $post_id, 'option4', true ).'<br>';
+    	echo get_post_meta( $post_id, 'option5', true ).'<br>';
+    	echo get_post_meta( $post_id, 'option6', true ).'<br>';
+    	echo get_post_meta( $post_id, 'option7', true ).'<br>';
     }
 }
 add_action( 'manage_slider_posts_custom_column', 'table_slider_content', 10, 2  );

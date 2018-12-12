@@ -29,7 +29,7 @@ function load_custom_wp_admin_style() {
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
 // dodatki dla stylu
 function theme_enqueue_styles() {
-		wp_enqueue_style( 'style-slider', get_template_directory_uri() . '/sedit/assets/css/slider.css', false, '' );
+		wp_enqueue_style( 'style-slider', get_template_directory_uri() . '/assets/css/slider.css', false, '' );
     wp_enqueue_style( 'style', get_template_directory_uri() . '/style.css', false, '' );
 		wp_enqueue_script( 'jquery.min', get_template_directory_uri() . '/sedit/assets/js/jquery.min.js', false, '3.3.1' );
 		wp_enqueue_script( 'responsiveslides.min', get_template_directory_uri() . '/sedit/assets/js/responsiveslides.min.js', false, '1.0.0' );

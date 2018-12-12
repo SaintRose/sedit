@@ -237,15 +237,27 @@ class seditAtoms extends seditModules
 
 	function switch_atoms($dataSwitch, $get_page){
 			$posttype = get_post_type();
-			if ($_GET['page']) {
-				$get_page = 0;
+			if (is_numeric($_GET['page'])) {
+				$get_page = $_GET['page'] - 1;
+			}else{
+				$get_page = $_GET['tab'];
+				if (empty($get_page)) {
+					$get_page = 0;
+				}
 			}
 			if (is_array($dataSwitch)) {
+				// echo '<pre>';
+				// print_r($dataSwitch);
+				// echo '</pre>';
 				foreach ($dataSwitch as $pageTab => $data) {
-				// 	echo '<pre>';
-				// 	print_r($data);
-				// 	echo '</pre>';
-				if (strval($pageTab) == strval($get_page) OR $data['posttype'] === $posttype) {
+					// echo '<pre>';
+					// print_r($data);
+					// echo '</pre>';
+				if (
+					strval($pageTab) === strval($get_page) OR
+					$data['posttype'] === $posttype
+					) {
+
 					$first = true; $head = null; $text = null;
 					// atomy
 					$head .= '
