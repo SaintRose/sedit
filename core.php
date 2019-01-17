@@ -49,6 +49,12 @@ add_image_size( 'thumb200x80', 200, 80, true );
 add_image_size( 'brama', 355, 800, true );
 add_theme_support( 'post-thumbnails' );
 
+//////////////TABLICE///////////////
+function sa($array){
+	echo "<pre>";
+	print_r($array);
+	echo "</pre>";
+}
 //////////////Zapisanie ustawień///////////////
 // NAME nazwa atomu
 // NAME nazwa wartosci
@@ -79,13 +85,19 @@ function sedit($postID = null, $name = null, $type = null, $size = null, $id = n
   }else {
     $up_img = get_option($name);
   }
+
 	switch ($type) {
 		case 'value':
+				if (function_exists('pll_')) {
+					echo $up_img = pll_( $up_img , 'sedit' );
+				}
 				return $up_img;
 			break;
 
 		case 'option':
-
+				if (function_exists('pll__')) {
+					$up_img = pll__( $up_img , 'sedit' );
+				}
 				return $up_img;
 			break;
 
