@@ -7,11 +7,9 @@ use SEDIT\seditAtoms;
 
 $sedit = new seditPage();
 
-
-
-
-
-
+register_nav_menus( array(
+	'top'    => 'Menu główne'
+) );
 
 add_action( 'admin_enqueue_scripts', 'load_custom_wp_admin_style' );
 // dodatki dla admina

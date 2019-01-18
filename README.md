@@ -92,32 +92,29 @@ $sedit->tabsData([
 
 	 [
 		'page' => 'HOME',
-		'title' => 'jakiś tytuł',
-		'description' => 'główny opis dla sekcji',
+		'title' => 'DANE',
+		'description' => 'Podstawowe informacje znajdujące się na stronie',
 		'dashicons' => 'dashicons-admin-tools',
 		'atoms' => [
 			  [
-				'title' => 'Imię',
-				'name' => 'logdo',
-				'type' => 'images',
-				'placeholder' => 'Imię i nazwisko',
+				'title' => 'Logo',
+				'name' => 'logo',
+				'type' => 'image',
 				'description' => 'Proszę uzupełnić dane',
 				],[
-				'title' => 'Zdjęcie',
-				'name' => 'foto',
+				'title' => 'Telefon',
+				'name' => 'tel',
 				'type' => 'input',
-				'placeholder' => 'input',
-				'description' => 'Kliknij aby wybrać z biblioteki mediów.'
+				'placeholder' => '537 168 459',
+				'description' => 'Numer telefonu kontaktowego'
 				],[
-				'title' => 'Zdjęcie',
-				'name' => 'foto',
+				'title' => 'Galeria',
 				'type' => 'title',
-				'placeholder' => 'input',
-				'description' => 'Kliknij aby wybrać z biblioteki mediów.'
+				'description' => 'Sekcja odpowiedzialna za edycje galerii'
 				],[
 				'title' => 'Zdjęcie',
 				'name' => 'foto',
-				'type' => 'imagess',
+				'type' => 'images',
 				'placeholder' => 'input',
 				'description' => 'Kliknij aby wybrać z biblioteki mediów.'
 				]
@@ -140,6 +137,43 @@ $sedit->tabsData([
 	]
 
 ]);
+```
+
+
+### Atomy dla custom post
+
+Przypisanie dostępnych atomów do typów postów `'posttype' => 'post'`
+
+
+```php
+$sedit->postTypeData([
+
+	[
+	 'page' => 'Dane',
+	 'posttype' => 'post',
+	 'title' => 'Link',
+	 'description' => 'Link do strony producenta',
+	 'dashicons' => 'dashicons-index-card',
+	 'atoms' => [
+			 [
+			 'name' => 'linkpost',
+			 'type' => 'input',
+			 'placeholder' => 'Wpisz link',
+			 ]
+		 ]
+	]
+
+]);
+```
+
+
+### Tłumaczenia Polylang
+
+Automatyczna aktywacja `Strings translations` w Polylang
+
+
+```php
+$sedit->langData();
 ```
 
 
