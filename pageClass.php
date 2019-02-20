@@ -20,6 +20,8 @@ class seditPage extends seditAtoms
 		//Konfigutacja dla //POST TYPE//
 		add_action( 'add_meta_boxes', array($this, 'page_create_metabox') );
 		add_action( 'save_post', array($this, 'sedit_save_post') );
+		//lang dla tabsow
+		add_action( 'save_post', array($this, 'langData') );
 	}
 
 ///////////////////////////////TYPE PAGES/////////////////////////////////
@@ -85,8 +87,8 @@ class seditPage extends seditAtoms
 			<form method="post" action="">
 				<div class="seditform">
 					<?php
-					//echo "<pre>";
-					//print_r($this->tabs);
+					// echo "<pre>";
+					// print_r($this->tabs);
 						echo seditAtoms::switch_atoms($this->tabs, $_GET['tab']);
 					 ?>
 				</div>
@@ -94,6 +96,21 @@ class seditPage extends seditAtoms
 	 </div>
 		<?php
 	}
+////////////////////////////////////////LANG/////////////////////////////////////
+function langData(){
+	if (function_exists( 'pll_register_string' )) {
+		if (is_array($this->tabs)) {
+			foreach ($this->tabs as $key => $array) {
+				foreach ($array['atoms'] as $keyatom => $value) {
+					$lang = sedit(null, $value['name'], 'value');
+					pll_register_string('sedit', $lang);
+				}
+			}
+		}
+	}
+
+}
+
 ////////////////////////////////////////POST TYPE//////////////////////////////////////
 
 

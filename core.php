@@ -7,11 +7,9 @@ use SEDIT\seditAtoms;
 
 $sedit = new seditPage();
 
-
-
-
-
-
+register_nav_menus( array(
+	'top'    => 'Menu główne'
+) );
 
 add_action( 'admin_enqueue_scripts', 'load_custom_wp_admin_style' );
 // dodatki dla admina
@@ -57,6 +55,12 @@ function sa($data){
 	//var_dump($data);
 }
 
+//////////////TABLICE///////////////
+function sa($array){
+	echo "<pre>";
+	print_r($array);
+	echo "</pre>";
+}
 //////////////Zapisanie ustawień///////////////
 // NAME nazwa atomu
 // NAME nazwa wartosci
@@ -87,13 +91,19 @@ function sedit($postID = null, $name = null, $type = null, $size = null, $id = n
   }else {
     $up_img = get_option($name);
   }
+
 	switch ($type) {
 		case 'value':
+				if (function_exists('pll_')) {
+					echo $up_img = pll_( $up_img , 'sedit' );
+				}
 				return $up_img;
 			break;
 
 		case 'option':
-
+				if (function_exists('pll__')) {
+					$up_img = pll__( $up_img , 'sedit' );
+				}
 				return $up_img;
 			break;
 
