@@ -46,6 +46,14 @@ add_image_size( 'thumb530', 530, 430, true );
 add_image_size( 'thumb200x80', 200, 80, true );
 add_image_size( 'brama', 355, 800, true );
 add_theme_support( 'post-thumbnails' );
+set_post_thumbnail_size(400, 400);
+
+function sa($data){
+	echo '<pre>';
+	print_r($data);
+	echo '</pre>';
+	//var_dump($data);
+}
 
 //////////////TABLICE///////////////
 function sa($array){
@@ -129,6 +137,7 @@ function sedit($postID = null, $name = null, $type = null, $size = null, $id = n
 				if (!is_array($up_img)) {
 					$up_img = explode(",", $up_img );
 				}
+<<<<<<< HEAD
 				if($up_img){
 					foreach ($up_img as $key => $value) {
 						$image_attributes = wp_get_attachment_image_src($value, $size);
@@ -139,6 +148,22 @@ function sedit($postID = null, $name = null, $type = null, $size = null, $id = n
 								<a data-lightbox="1" href="'.$image_attributes_full[0].'"><img src="'.$image_attributes[0].'"></img></a>
 							</div>';
 						}
+=======
+				foreach ($up_img as $key => $value) {
+					$image_attributes = wp_get_attachment_image_src($value, $size);
+					$image_attributes_full = wp_get_attachment_image_src($value, 'full');
+					if ($image_attributes) {
+						$text .= '
+						<a
+						href="'.$image_attributes_full[0].'"
+						data-lightbox="'.$image_attributes_full[0].'"
+						>
+							<div class="sedit-img-'.$key.'">
+								<img src="'.$image_attributes[0].'">
+							</div>
+						</a>
+						';
+>>>>>>> 7a4374b513782a8b526d71c7bc9f49e1e8852701
 					}
 				}
 				
