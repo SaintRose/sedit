@@ -127,17 +127,21 @@ function sedit($postID = null, $name = null, $type = null, $size = null, $id = n
 		case 'images':
 			if ($up_img) {
 				if (!is_array($up_img)) {
-					$get_id_image = explode(",", $up_img );
+					$up_img = explode(",", $up_img );
 				}
-				foreach ($up_img as $key => $value) {
-					$image_attributes = wp_get_attachment_image_src($value, $size);
-					if ($image_attributes) {
-						$text .= '
-						<div class="sedit-img-'.$key.'">
-							<img src="'.$image_attributes[0].'">
-						</div>';
+				if($up_img){
+					foreach ($up_img as $key => $value) {
+						$image_attributes = wp_get_attachment_image_src($value, $size);
+						if ($image_attributes) {
+							$image_attributes_full = wp_get_attachment_image_src($value, 'full');
+							$text .= '
+							<div class="seditImges sedit-img-'.$key.'">
+								<a data-lightbox="1" href="'.$image_attributes_full[0].'"><img src="'.$image_attributes[0].'"></img></a>
+							</div>';
+						}
 					}
 				}
+				
 			}
 			return $text;
 			break;
@@ -242,4 +246,7 @@ function asset($name){
 }
 function assetImg($name){
 	echo '<img src="'.get_stylesheet_directory_uri().'/assets/images/'.$name.'" >';
+}
+function assetImgGet($name){
+	return '<img src="'.get_stylesheet_directory_uri().'/assets/images/'.$name.'" >';
 }
